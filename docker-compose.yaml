@@ -1,0 +1,126 @@
+version: "3.8"
+
+services:
+  # api-gateway service
+  gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - SERVICE_NAME=gateway-service
+    volumes:
+      - ./api-gateway:/app
+    networks:
+      - app-network
+
+  # user service
+  user:
+    build:
+      context: ./services/user
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+      - SERVICE_NAME=user-service
+    volumes:
+      - ./services/user:/app
+    networks:
+      - app-network
+
+  # ticket service
+  ticket:
+    build:
+      context: ./services/ticket
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    environment:
+      - PORT=5002
+      - SERVICE_NAME=ticket-service
+    volumes:
+      - ./services/ticket:/app
+    networks:
+      - app-network
+
+  # team service
+  team:
+    build:
+      context: ./services/team
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5003"
+    environment:
+      - PORT=5003
+      - SERVICE_NAME=team-service
+    volumes:
+      - ./services/team:/app
+    networks:
+      - app-network
+
+  # system service
+  system:
+    build:
+      context: ./services/system
+      dockerfile: Dockerfile
+    ports:
+      - "5004:5004"
+    environment:
+      - PORT=5004
+      - SERVICE_NAME=system-service
+    volumes:
+      - ./services/system:/app
+    networks:
+      - app-network
+
+  # notification service
+  notification:
+    build:
+      context: ./services/notification
+      dockerfile: Dockerfile
+    ports:
+      - "5005:5005"
+    environment:
+      - PORT=5005
+      - SERVICE_NAME=notification-service
+    volumes:
+      - ./services/notification:/app
+    networks:
+      - app-network
+
+  # category service
+  category:
+    build:
+      context: ./services/category
+      dockerfile: Dockerfile
+    ports:
+      - "5006:5006"
+    environment:
+      - PORT=5006
+      - SERVICE_NAME=category-service
+    volumes:
+      - ./services/category:/app
+    networks:
+      - app-network
+
+  # logger service
+  logger:
+    build:
+      context: ./services/logger
+      dockerfile: Dockerfile
+    ports:
+      - "5007:5007"
+    environment:
+      - PORT=5007
+      - SERVICE_NAME=logger-service
+    volumes:
+      - ./services/logger:/app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
