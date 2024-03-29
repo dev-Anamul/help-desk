@@ -21,13 +21,31 @@ services:
     build:
       context: ./services/user
       dockerfile: Dockerfile
-    ports:
-      - "5001:5001"
+    # ports:
+    #   - "5001:5001"
     environment:
       - PORT=5001
       - SERVICE_NAME=user-service
+      - LOGGER_SERVICE_URL=http://logger:5007
     volumes:
       - ./services/user:/app
+    networks:
+      - app-network
+
+  # auth service
+  auth:
+    build:
+      context: ./services/auth
+      dockerfile: Dockerfile
+    # ports:
+    #   - "5008:5008"
+    environment:
+      - PORT=5008
+      - SERVICE_NAME=auth-service
+      - USER_SERVICE_URL=http://user:5001
+      - LOGGER_SERVICE_URL=http://logger:5007
+    volumes:
+      - ./services/auth:/app
     networks:
       - app-network
 
@@ -36,8 +54,8 @@ services:
     build:
       context: ./services/ticket
       dockerfile: Dockerfile
-    ports:
-      - "5002:5002"
+    # ports:
+    #   - "5002:5002"
     environment:
       - PORT=5002
       - SERVICE_NAME=ticket-service
@@ -51,8 +69,8 @@ services:
     build:
       context: ./services/team
       dockerfile: Dockerfile
-    ports:
-      - "5003:5003"
+    # ports:
+    #   - "5003:5003"
     environment:
       - PORT=5003
       - SERVICE_NAME=team-service
@@ -66,8 +84,8 @@ services:
     build:
       context: ./services/system
       dockerfile: Dockerfile
-    ports:
-      - "5004:5004"
+    # ports:
+    #   - "5004:5004"
     environment:
       - PORT=5004
       - SERVICE_NAME=system-service
@@ -81,8 +99,8 @@ services:
     build:
       context: ./services/notification
       dockerfile: Dockerfile
-    ports:
-      - "5005:5005"
+    # ports:
+    #   - "5005:5005"
     environment:
       - PORT=5005
       - SERVICE_NAME=notification-service
@@ -96,8 +114,8 @@ services:
     build:
       context: ./services/category
       dockerfile: Dockerfile
-    ports:
-      - "5006:5006"
+    # ports:
+    #   - "5006:5006"
     environment:
       - PORT=5006
       - SERVICE_NAME=category-service
@@ -111,8 +129,6 @@ services:
     build:
       context: ./services/logger
       dockerfile: Dockerfile
-    ports:
-      - "5007:5007"
     environment:
       - PORT=5007
       - SERVICE_NAME=logger-service

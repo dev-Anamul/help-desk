@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import axios from "axios";
 
 // env configuration
 dotenv.config();
@@ -14,12 +15,21 @@ app.use([express.json(), cors(), morgan("dev")]);
 
 // health check
 app.get("/health", (_req, res) => {
+  console.log("user Id", _req.headers["x-user-id"]);
+
   res
     .status(200)
     .json({ status: `${process.env.SERVICE_NAME} service is up and running` });
 });
 
 // Routes
+app.get("/:id", async (_req: Request, res: Response) => {
+  console.log("id params", _req.params.id);
+
+  const response = await axios.get(`${process.env.LOGGER_SERVICE_URL}/health`);
+
+  return res.status(200).json(response.data);
+});
 
 // 404 error handler
 app.use((_req: Request, res: Response) => {

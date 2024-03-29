@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
+import cors from "cors";
+import morgan from "morgan";
 import dotenv from "dotenv";
-import { useProxyService } from "./proxy-services";
-import { applyMiddleware } from "./middlewares";
 
 // env configuration
 dotenv.config();
@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 // Middlewares
-applyMiddleware(app);
+app.use([express.json(), cors(), morgan("dev")]);
 
 // health check
 app.get("/health", (_req, res) => {
@@ -18,7 +18,6 @@ app.get("/health", (_req, res) => {
 });
 
 // Routes
-useProxyService(app);
 
 // 404 error handler
 app.use((_req: Request, res: Response) => {
@@ -31,7 +30,7 @@ app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 // define port
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5007;
 
 // start server
 app.listen(PORT, () => {
