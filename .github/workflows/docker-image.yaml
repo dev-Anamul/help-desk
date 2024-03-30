@@ -6,7 +6,36 @@ on:
       - master
 
 jobs:
+  test-services:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      # test auth service
+      - name: Test auth service
+        run: |
+          cd services/auth
+          yarn install --frozen-lockfile
+          yarn test
+      # test user service
+      - name: Test user service
+        run: |
+          cd services/user
+          yarn install --frozen-lockfile
+          yarn test
+      # test ticket service
+      - name: Test ticket service
+        run: |
+          cd services/ticket
+          yarn install --frozen-lockfile
+          yarn test
+
   build-and-push:
+    needs: test-services
     runs-on: ubuntu-latest
     steps:
       # Checkout the code
