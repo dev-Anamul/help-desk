@@ -1,0 +1,26 @@
+post:
+  description: Login to the application
+  operationId: login
+  summary: Login
+  security: []
+  tags:
+    - Auth
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/auth/login.yaml"
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwiaWF0IjoxNjI5MjM5MDIyfQ.7"
+    "400":
+      $ref: "../../components/responses/400.yaml"

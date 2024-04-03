@@ -2,5 +2,15 @@
   "name": "specification",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build:yml": "redocly bundle openapi.yaml --output spec/openapi.yaml",
+    "build:json": "redocly bundle openapi.yaml --output spec/openapi.json",
+    "serve": "redocly serve spec/openapi.yaml",
+    "lint": "redocly lint openapi.yaml",
+    "validate": "redocly validate openapi.yaml"
+  },
+  "dependencies": {
+    "@redocly/cli": "^1.10.6"
+  }
 }

@@ -1,0 +1,4 @@
+id:
+  $ref: "./path/id.yaml"
+page:
+  $ref: "./query/page.yaml"

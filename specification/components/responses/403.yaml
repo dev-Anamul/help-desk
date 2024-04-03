@@ -1,0 +1,12 @@
+description: forbidden
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 403
+        message:
+          type: string
+          example: "Forbidden"
