@@ -2,6 +2,11 @@ import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import { useProxyService } from "./proxy-services";
 import { applyMiddleware } from "./middlewares";
+import * as yaml from "yamljs";
+import * as swaggerUi from "swagger-ui-express";
+
+// swagger documentation
+const swaggerDocument = yaml.load("./src/spec/openapi.yaml");
 
 // env configuration
 dotenv.config();
@@ -19,6 +24,9 @@ app.get("/health", (_req, res) => {
 
 // Routes
 useProxyService(app);
+
+// API Documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // 404 error handler
 app.use((_req: Request, res: Response) => {

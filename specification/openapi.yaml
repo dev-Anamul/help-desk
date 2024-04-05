@@ -1,42 +1,35 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Easy Tax Application
+  title: Help Desk API
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
   description: >-
-    Introducing our user-friendly Easy Tax REST API, designed to simplify
-    tax-related data integration. With our intuitive platform, preparing and
-    submitting your taxes has never been easier. Say goodbye to complicated
-    forms and confusing jargon; our application guides you through each step
-    with clear, plain-language instructions.
+    "Help Desk" is a comprehensive customer support application designed to streamline and optimize customer service operations. With intuitive ticket management, efficient communication tools, and a robust knowledge base, Help Desk empowers organizations to provide prompt assistance and resolution to customer inquiries and issues. From ticket submission to resolution, Help Desk ensures a seamless support experience, enhancing customer satisfaction and loyalty.
   contact:
-    name: Pixfar developer team
+    name: Pixfar Development Team
     url: https://pixfar.com
-    email: pixfar@gmail.com
+    email: anamul@pixfar.com
 servers:
-  - description: dev
-    url: http://127.0.0.1:6050/api/v1
+  - description: Local Development
+    url: http://127.0.0.1:6050
   - description: Production
-    url: https://api.easy-tax.pixfar.com/api/v1
-  - description: Easy Tax API
-    url: https://api-fluxx.fluxx.co.nz/api/v1
+    url: https://api.easy-tax.pixfar.com
+
 tags:
   - name: Auth
     description: Authentication endpoints (public)
-  - name: Expense
-    description: Expense endpoint (private)
-  - name: OCR
-    description: OCR endpoints (private)
   - name: Category
     description: Category endpoints (private)
-  - name: Income Source
-    description: Income Source endpoints (private)
-  - name: Admin
-    description: User endpoint (private & admin)
-  - name: Notification
-    description: notification endpoints (private)
+  - name: System
+    description: System endpoints (private)
+  - name: Team
+    description: Team endpoints (private)
+  - name: Ticket
+    description: Ticket endpoints (private)
+  - name: User
+    description: User endpoints (private)
 
 paths:
   # authentication

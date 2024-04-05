@@ -159,6 +159,71 @@ services:
     networks:
       - app-network
 
+  # postgres service
+  postgres:
+    image: postgres:latest
+    # ports:
+    #   - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  # pgadmin service
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "example@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "example"
+    networks:
+      - app-network
+
+  # mongo service
+  mongo:
+    image: mongo:latest
+    # ports:
+    #   - "27020:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh mongo:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  # mongo-express service
+  mongo-express:
+    image: mongo-express
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: "mongo"
+      ME_CONFIG_MONGODB_PORT: "27017"
+      ME_CONFIG_BASICAUTH_USERNAME: "root"
+      ME_CONFIG_BASICAUTH_PASSWORD: "root"
+    networks:
+      - app-network
+
   # mailhog service
   mailhog:
     image: mailhog/mailhog
@@ -178,3 +243,5 @@ volumes:
   rabbitmq-data:
   redis-data:
   mailhog-data:
+  mongo-data:
+  postgres-data:

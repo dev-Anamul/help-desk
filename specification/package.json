@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "bundle": "redocly bundle openapi.yaml --output ../api-gateway/src/spec/openapi.yaml",
     "build:yml": "redocly bundle openapi.yaml --output spec/openapi.yaml",
     "build:json": "redocly bundle openapi.yaml --output spec/openapi.json",
     "serve": "redocly serve spec/openapi.yaml",
