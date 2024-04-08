@@ -7,6 +7,9 @@ content:
         code:
           type: integer
           example: 401
+        status:
+          type: string
+          example: "error"
         message:
           type: string
           example: "Unauthorized"

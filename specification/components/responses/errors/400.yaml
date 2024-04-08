@@ -1,4 +1,4 @@
-description: not found
+description: bad request
 content:
   application/json:
     schema:
@@ -6,7 +6,10 @@ content:
       properties:
         code:
           type: integer
-          example: 404
+          example: 400
+        status:
+          type: string
+          example: "error"
         message:
           type: string
-          example: "Not found"
+          example: "Bad request"

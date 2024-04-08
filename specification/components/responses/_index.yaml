@@ -1,8 +1,15 @@
+# error responses
 400:
-  $ref: "./400.yaml"
+  $ref: errors/400.yaml
 401:
-  $ref: "./401.yaml"
+  $ref: errors/401.yaml
 403:
-  $ref: "./403.yaml"
+  $ref: errors/403.yaml
 404:
-  $ref: "./404.yaml"
+  $ref: errors/404.yaml
+500:
+  $ref: errors/500.yaml
+
+# auth responses
+signup:
+  $ref: auth/signup-success.yaml

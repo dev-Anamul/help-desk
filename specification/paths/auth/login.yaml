@@ -1,5 +1,5 @@
 post:
-  description: Login to the application
+  description: Login to the application using email and password
   operationId: login
   summary: Login
   security: []
@@ -23,4 +23,4 @@ post:
                 type: string
                 example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwiaWF0IjoxNjI5MjM5MDIyfQ.7"
     "400":
-      $ref: "../../components/responses/400.yaml"
+      $ref: ../../components/responses/errors/400.yaml

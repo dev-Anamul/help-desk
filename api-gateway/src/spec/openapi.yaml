@@ -29,9 +29,26 @@ tags:
   - name: User
     description: User endpoints (private)
 paths:
+  /api/v1/auth/signup:
+    post:
+      description: Sign up a new user to the application
+      operationId: userSignup
+      summary: Sign as a new user
+      tags:
+        - Auth
+      security: []
+      requestBody:
+        $ref: '#/components/requestBodies/signup'
+      responses:
+        '201':
+          $ref: '#/components/responses/signup-success'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
   /api/v1/auth/login:
     post:
-      description: Login to the application
+      description: Login to the application using email and password
       operationId: login
       summary: Login
       security: []
@@ -74,6 +91,19 @@ components:
         example: 1
         default: 1
   schemas:
+    signup:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: example@gmail.com
+        password:
+          type: string
+          example: password
+      required:
+        - email
+        - password
     login:
       type: object
       properties:
@@ -98,6 +128,9 @@ components:
               code:
                 type: integer
                 example: 400
+              status:
+                type: string
+                example: error
               message:
                 type: string
                 example: Bad request
@@ -111,6 +144,9 @@ components:
               code:
                 type: integer
                 example: 401
+              status:
+                type: string
+                example: error
               message:
                 type: string
                 example: Unauthorized
@@ -124,6 +160,9 @@ components:
               code:
                 type: integer
                 example: 403
+              status:
+                type: string
+                example: error
               message:
                 type: string
                 example: Forbidden
@@ -137,9 +176,55 @@ components:
               code:
                 type: integer
                 example: 404
+              status:
+                type: string
+                example: error
               message:
                 type: string
                 example: Not found
+    '500':
+      description: internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 500
+              status:
+                type: string
+                example: error
+              message:
+                type: string
+                example: Internal server error
+    signup-success:
+      description: signup successful
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 201
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: Signup successful
+              token:
+                type: string
+                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE1MTYyMzkwMjJ9
+    signup:
+      $ref: '#/components/responses/signup-success'
+  requestBodies:
+    signup:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/signup'
   securitySchemes:
     bearerAuth:
       type: http

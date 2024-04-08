@@ -33,6 +33,8 @@ tags:
 
 paths:
   # authentication
+  /api/v1/auth/signup:
+    $ref: "./paths/auth/signup.yaml"
   /api/v1/auth/login:
     $ref: "./paths/auth/login.yaml"
 
@@ -43,6 +45,8 @@ components:
     $ref: "./components/schemas/_index.yaml"
   responses:
     $ref: "components/responses/_index.yaml"
+  requestBodies:
+    $ref: "./components/request-bodies/_index.yaml"
 
     # Security Definitions
   securitySchemes:

@@ -1,2 +1,4 @@
 login:
   $ref: "./auth/login.yaml"
+signup:
+  $ref: "./auth/signup.yaml"

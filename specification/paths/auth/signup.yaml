@@ -1,0 +1,16 @@
+post:
+  description: Sign up a new user to the application
+  operationId: userSignup
+  summary: Sign as a new user
+  tags:
+    - Auth
+  security: []
+  requestBody:
+    $ref: ../../components/request-bodies/auth/signup.yaml
+  responses:
+    201:
+      $ref: ../../components/responses/auth/signup-success.yaml
+    400:
+      $ref: ../../components/responses/errors/400.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml
