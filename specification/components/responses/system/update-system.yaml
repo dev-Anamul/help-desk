@@ -1,0 +1,20 @@
+description: Response body for updating a system
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        status:
+          type: string
+          example: "success"
+        message:
+          type: string
+          example: "System updated successfully"
+        data:
+          type: object
+          properties:
+            system:
+              $ref: "../../schemas/system/system.yaml"

@@ -1,0 +1,5 @@
+description: Request body for creating a system
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/system/create-system.yaml

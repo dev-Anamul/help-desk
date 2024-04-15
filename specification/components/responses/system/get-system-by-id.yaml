@@ -1,0 +1,5 @@
+description: This api endpoints returns the system by id
+content:
+  application/json:
+    schema:
+      $ref: "../../schemas/system/system.yaml"

@@ -1,0 +1,72 @@
+# GET A SYSTEM BY ID
+get:
+  description: This endpoint returns a system by id
+  summary: Get a system by id
+  operationId: get-system
+  tags:
+    - System
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  responses:
+    200:
+      $ref: ../../components/responses/system/get-system-by-id.yaml
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"
+
+#  UPDATE A SYSTEM BY ID
+patch:
+  description: This endpoint updates a system by id
+  summary: Update a system by id
+  operationId: update-system
+  tags:
+    - System
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  requestBody:
+    $ref: "../../components/request-bodies/system/update-system.yaml"
+  responses:
+    200:
+      $ref: "../../components/responses/system/update-system.yaml"
+    400:
+      $ref: "../../components/responses/errors/400.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"
+
+# DELETE A SYSTEM BY ID
+delete:
+  description: This endpoint deletes a system by id
+  summary: Delete a system by id
+  operationId: delete-system
+  tags:
+    - System
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  responses:
+    204:
+      $ref: "../../components/responses/system/delete-system.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"

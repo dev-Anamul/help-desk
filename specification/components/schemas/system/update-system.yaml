@@ -1,0 +1,15 @@
+type: object
+properties:
+  name:
+    type: string
+    example: "system name"
+  description:
+    type: string
+    example: "system description"
+  status:
+    type: string
+    example: "active"
+required:
+  - name
+  - description
+  - status

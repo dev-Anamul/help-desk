@@ -1,0 +1,39 @@
+post:
+  description: This endpoint creates a new system
+  summary: Create a new system
+  operationId: create-system
+  tags:
+    - System
+  security:
+    - JWT: []
+  requestBody:
+    $ref: "../../components/request-bodies/system/create-system.yaml"
+  responses:
+    201:
+      $ref: "../../components/responses/system/create-system.yaml"
+    400:
+      $ref: "../../components/responses/errors/400.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"
+
+get:
+  description: This endpoint returns all systems
+  summary: Get all systems
+  operationId: get-systems
+  tags:
+    - System
+  security:
+    - JWT: []
+  responses:
+    200:
+      $ref: "../../components/responses/system/get-systems.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"

@@ -1,0 +1,5 @@
+description: Request body for updating a system
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/system/update-system.yaml

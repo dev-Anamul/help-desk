@@ -1,0 +1,22 @@
+description: Response body for getting all systems
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        status:
+          type: string
+          example: "success"
+        message:
+          type: string
+          example: "Systems retrieved successfully"
+        data:
+          type: object
+          properties:
+            systems:
+              type: array
+              items:
+                $ref: ../../schemas/system/system.yaml

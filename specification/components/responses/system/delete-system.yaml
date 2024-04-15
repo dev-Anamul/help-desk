@@ -1,0 +1,15 @@
+description: Response body for deleting a system
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 204
+        status:
+          type: string
+          example: "success"
+        message:
+          type: string
+          example: "System deleted successfully"

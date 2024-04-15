@@ -1,0 +1,27 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: The unique identifier of the system
+  name:
+    type: string
+    description: The name of the system
+  description:
+    type: string
+    description: The description of the system
+  status:
+    type: string
+    description: The status of the system
+  createdAt:
+    type: string
+    format: date-time
+    description: The date and time the system was created
+  updatedAt:
+    type: string
+    format: date-time
+    description: The date and time the system was last updated
+  deletedAt:
+    type: string
+    format: date-time
+    description: The date and time the system was deleted

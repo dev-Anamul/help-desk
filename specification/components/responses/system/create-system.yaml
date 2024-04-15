@@ -1,0 +1,20 @@
+description: Response body for creating a system
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 201
+        status:
+          type: string
+          example: "success"
+        message:
+          type: string
+          example: "System created successfully"
+        data:
+          type: object
+          properties:
+            system:
+              $ref: ../../schemas/system/system.yaml

@@ -340,6 +340,113 @@ paths:
           $ref: '#/components/responses/403'
         '500':
           $ref: '#/components/responses/500'
+  /api/v1/systems:
+    post:
+      description: This endpoint creates a new system
+      summary: Create a new system
+      operationId: create-system
+      tags:
+        - System
+      security:
+        - JWT: []
+      requestBody:
+        $ref: '#/components/requestBodies/create-system'
+      responses:
+        '201':
+          $ref: '#/components/responses/create-system'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '500':
+          $ref: '#/components/responses/500'
+    get:
+      description: This endpoint returns all systems
+      summary: Get all systems
+      operationId: get-systems
+      tags:
+        - System
+      security:
+        - JWT: []
+      responses:
+        '200':
+          $ref: '#/components/responses/get-systems'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/systems/{id}:
+    get:
+      description: This endpoint returns a system by id
+      summary: Get a system by id
+      operationId: get-system
+      tags:
+        - System
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/get-system-by-id'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    patch:
+      description: This endpoint updates a system by id
+      summary: Update a system by id
+      operationId: update-system
+      tags:
+        - System
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        $ref: '#/components/requestBodies/update-system'
+      responses:
+        '200':
+          $ref: '#/components/responses/update-system'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      description: This endpoint deletes a system by id
+      summary: Delete a system by id
+      operationId: delete-system
+      tags:
+        - System
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          $ref: '#/components/responses/delete-system'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
 components:
   parameters:
     id:
@@ -505,6 +612,70 @@ components:
           type: string
           format: date-time
           example: '2021-01-01T00:00:00Z'
+    system:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the system
+        name:
+          type: string
+          description: The name of the system
+        description:
+          type: string
+          description: The description of the system
+        status:
+          type: string
+          description: The status of the system
+        createdAt:
+          type: string
+          format: date-time
+          description: The date and time the system was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date and time the system was last updated
+        deletedAt:
+          type: string
+          format: date-time
+          description: The date and time the system was deleted
+    create-system:
+      type: object
+      properties:
+        name:
+          type: string
+          example: System Name
+        description:
+          type: string
+          example: System Description
+        url:
+          type: string
+          example: https://example.com
+        logo:
+          type: string
+          example: https://example.com/logo.png
+      required:
+        - name
+        - description
+        - url
+        - logo
+    update-system:
+      type: object
+      properties:
+        name:
+          type: string
+          example: system name
+        description:
+          type: string
+          example: system description
+        status:
+          type: string
+          example: active
+      required:
+        - name
+        - description
+        - status
   responses:
     '400':
       description: bad request
@@ -827,6 +998,93 @@ components:
                     type: array
                     items:
                       $ref: '#/components/schemas/ticket'
+    get-systems:
+      description: Response body for getting all systems
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: Systems retrieved successfully
+              data:
+                type: object
+                properties:
+                  systems:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/system'
+    create-system:
+      description: Response body for creating a system
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 201
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: System created successfully
+              data:
+                type: object
+                properties:
+                  system:
+                    $ref: '#/components/schemas/system'
+    get-system-by-id:
+      description: This api endpoints returns the system by id
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/system'
+    delete-system:
+      description: Response body for deleting a system
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 204
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: System deleted successfully
+    update-system:
+      description: Response body for updating a system
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: System updated successfully
+              data:
+                type: object
+                properties:
+                  system:
+                    $ref: '#/components/schemas/system'
     signup:
       $ref: '#/components/responses/signup-success'
   requestBodies:
@@ -877,6 +1135,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/update-category'
+    create-system:
+      description: Request body for creating a system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create-system'
+    update-system:
+      description: Request body for updating a system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update-system'
   securitySchemes:
     JWT:
       type: http

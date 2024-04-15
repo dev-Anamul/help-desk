@@ -60,6 +60,12 @@ paths:
   /api/v1/categories/{id}/tickets:
     $ref: paths/category/tickets-by-category.yaml
 
+  # system
+  /api/v1/systems:
+    $ref: paths/system/systems.yaml
+  /api/v1/systems/{id}:
+    $ref: paths/system/system.yaml
+
 components:
   parameters:
     $ref: "./components/parameters/_index.yaml"
