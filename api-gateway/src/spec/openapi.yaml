@@ -73,6 +73,273 @@ paths:
                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwiaWF0IjoxNjI5MjM5MDIyfQ.7
         '400':
           $ref: '#/components/responses/400'
+  /api/v1/auth/forgot-password:
+    post:
+      description: route for reseting password if any user forgot password to login
+      summary: forgot password
+      operationId: forgot-password
+      security: []
+      tags:
+        - Auth
+      requestBody:
+        $ref: '#/components/requestBodies/forgot-password'
+      responses:
+        '200':
+          $ref: '#/components/responses/forgot-password'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/auth/reset-password:
+    post:
+      description: this api url is used to reset the login credentials if any one forgot the login credentials
+      summary: reset password
+      operationId: reset-password
+      security: []
+      tags:
+        - Auth
+      requestBody:
+        $ref: '#/components/requestBodies/reset-password'
+      responses:
+        '200':
+          $ref: '#/components/responses/reset-password'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/auth/verify-token:
+    post:
+      description: This api endpoints used to verify the jwt token if it is valid or not
+      summary: Verify JWT token
+      operationId: verify-jwt-token
+      tags:
+        - Auth
+      security:
+        - JWT: []
+      requestBody:
+        $ref: '#/components/requestBodies/verify-token'
+      responses:
+        '200':
+          $ref: '#/components/responses/verify-token'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/auth/change-password:
+    patch:
+      description: This api endpoints used to change password for login user
+      summary: Change password for login user
+      operationId: change-password
+      security:
+        - JWT: []
+      tags:
+        - Auth
+      requestBody:
+        $ref: '#/components/requestBodies/change-password'
+      responses:
+        '200':
+          $ref: '#/components/responses/change-password'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/auth/update-profile:
+    patch:
+      description: This api endpoints is used to update the logged in user's profile information
+      summary: Update profile information
+      operationId: update-profile
+      tags:
+        - Auth
+      security:
+        - JWT: []
+      requestBody:
+        $ref: '#/components/requestBodies/update-profile'
+      responses:
+        '200':
+          $ref: '#/components/responses/update-profile'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/auth/me:
+    get:
+      description: This endpoints is used to get the logged in users information
+      summary: Get Logged in user's information
+      operationId: user-info
+      tags:
+        - Auth
+      security:
+        - JWT: []
+      responses:
+        '200':
+          $ref: '#/components/responses/user-info'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/auth/delete-account:
+    delete:
+      description: This api endpoints used to delete logged in user's account
+      summary: Delete user account
+      operationId: delete-account
+      tags:
+        - Auth
+      security:
+        - JWT: []
+      responses:
+        '200':
+          $ref: '#/components/responses/delete-profile'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/categories:
+    post:
+      description: This api endpoint is used to create a new category
+      summary: create a new category
+      operationId: create-category
+      tags:
+        - Category
+      security:
+        - JWT: []
+      requestBody:
+        $ref: '#/components/requestBodies/create-category'
+      responses:
+        '201':
+          $ref: '#/components/responses/create-category'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '500':
+          $ref: '#/components/responses/500'
+    get:
+      description: This api endpoint is used to get all categories
+      summary: get all categories
+      operationId: get-all-categories
+      tags:
+        - Category
+      security:
+        - JWT: []
+      responses:
+        '200':
+          $ref: '#/components/responses/get-all-categories'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/categories/{id}:
+    get:
+      description: This api endpoint is used to get category by id
+      summary: get category by id
+      operationId: get-category-by-id
+      tags:
+        - Category
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/get-category-by-id'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    patch:
+      description: This api endpoint is used to update category by id
+      summary: update category by id
+      operationId: update-category-by-id
+      tags:
+        - Category
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        $ref: '#/components/requestBodies/update-category'
+      responses:
+        '200':
+          $ref: '#/components/responses/get-category-by-id'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      description: This api endpoint is used to delete category by id
+      summary: delete category by id
+      operationId: delete-category-by-id
+      tags:
+        - Category
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/delete-category-by-id'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/categories/{id}/tickets:
+    get:
+      description: This endpoint returns all tickets by category id
+      summary: Get all tickets by category id
+      operationId: get-tickets-by-category
+      tags:
+        - Category
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/get-tickets-by-category'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '500':
+          $ref: '#/components/responses/500'
 components:
   parameters:
     id:
@@ -117,6 +384,127 @@ components:
       required:
         - email
         - password
+    forgot-password:
+      type: object
+      properties:
+        email:
+          type: string
+          description: email which use to create the account
+          example: example@gmail.com
+      required:
+        - email
+    reset-password:
+      type: object
+      properties:
+        token:
+          type: string
+          example: token
+      required:
+        - token
+    verify-token:
+      type: object
+      properties:
+        token:
+          type: string
+          example: token
+      required:
+        - token
+    change-password:
+      type: object
+      properties:
+        currentPassword:
+          type: string
+          example: 12345678
+        newPassword:
+          type: string
+          example: 12345678
+        confirmPassword:
+          type: string
+          example: 12345678
+      required:
+        - currentPassword
+        - newPassword
+        - confirmPassword
+    user:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Jon
+        lastName:
+          type: string
+          example: Doe
+        email:
+          type: string
+          format: email
+          example: example@gmail.com
+    category:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Category name
+        description:
+          type: string
+          example: Category description
+        created_at:
+          type: string
+          format: date-time
+          example: '2021-01-01T00:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2021-01-01T00:00:00Z'
+    create-category:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Category name
+        description:
+          type: string
+          example: Category description
+      required:
+        - name
+        - description
+    update-category:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Category 1
+        description:
+          type: string
+          example: Category 1 description
+    ticket:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Ticket title
+        description:
+          type: string
+          example: Ticket description
+        status:
+          type: string
+          example: open
+        priority:
+          type: string
+          example: low
+        categoryId:
+          type: integer
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          example: '2021-01-01T00:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2021-01-01T00:00:00Z'
   responses:
     '400':
       description: bad request
@@ -217,6 +605,228 @@ components:
               token:
                 type: string
                 example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE1MTYyMzkwMjJ9
+    forgot-password:
+      description: reset email send successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: Reset password email send to successfully
+    reset-password:
+      description: success responses for reset password request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: password reset successful. Please login again.
+    verify-token:
+      description: Success response for valid token after verify the token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: token is valid
+    change-password:
+      description: response body for successfully change password
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: password changed successfully
+    update-profile:
+      description: Success response for updating user's profile information
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: Profile updated successfully
+              data:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/user'
+    user-info:
+      description: logged in user's information
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user'
+    delete-profile:
+      description: Success response if logged in user's account is deleted
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: account deleted successfully
+    get-all-categories:
+      description: Response body for getting all categories
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: categories fetched successfully
+              data:
+                type: object
+                properties:
+                  categories:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/category'
+    create-category:
+      description: Response body for successfully creating a new category
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 201
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: category created successfully
+              data:
+                type: object
+                properties:
+                  category:
+                    $ref: '#/components/schemas/category'
+    get-category-by-id:
+      description: Response body for getting a category by id
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: category fetched successfully
+              data:
+                type: object
+                properties:
+                  category:
+                    $ref: '#/components/schemas/category'
+    delete-category-by-id:
+      description: Response body for deleting a category by ID
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: category deleted successfully
+    get-tickets-by-category:
+      description: Response body for getting tickets by category
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: tickets fetched successfully
+              data:
+                type: object
+                properties:
+                  tickets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ticket'
     signup:
       $ref: '#/components/responses/signup-success'
   requestBodies:
@@ -225,8 +835,50 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/signup'
+    forgot-password:
+      description: forgot password request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forgot-password'
+    reset-password:
+      description: request body for reset the login credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/reset-password'
+    verify-token:
+      description: request body for verify jwt token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/verify-token'
+    change-password:
+      description: request body for change password
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/change-password'
+    update-profile:
+      description: Request body for update the logged in user's information
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user'
+    create-category:
+      description: Request body for creating a new category
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create-category'
+    update-category:
+      description: Request body for updating a category
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update-category'
   securitySchemes:
-    bearerAuth:
+    JWT:
       type: http
       scheme: bearer
       bearerFormat: JWT

@@ -1,0 +1,16 @@
+description: Response body for deleting a category by ID
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 200
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: category deleted successfully

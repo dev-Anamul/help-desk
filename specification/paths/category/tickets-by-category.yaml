@@ -1,0 +1,19 @@
+get:
+  description: This endpoint returns all tickets by category id
+  summary: Get all tickets by category id
+  operationId: get-tickets-by-category
+  tags:
+    - Category
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  responses:
+    200:
+      $ref: ../../components/responses/ticket/get-tickets-by-category.yaml
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"

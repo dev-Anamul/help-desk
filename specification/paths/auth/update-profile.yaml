@@ -1,0 +1,21 @@
+patch:
+  description: This api endpoints is used to update the logged in user's profile information
+  summary: Update profile information
+  operationId: update-profile
+  tags:
+    - Auth
+  security:
+    - JWT: []
+  requestBody:
+    $ref: ../../components/request-bodies/auth/update-profile.yaml
+  responses:
+    200:
+      $ref: ../../components/responses/auth/update-profile.yaml
+    400:
+      $ref: ../../components/responses/errors/400.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    404:
+      $ref: ../../components/responses/errors/404.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml

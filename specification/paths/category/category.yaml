@@ -1,0 +1,70 @@
+# GET CATEGORY BY ID
+get:
+  description: This api endpoint is used to get category by id
+  summary: get category by id
+  operationId: get-category-by-id
+  tags:
+    - Category
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  responses:
+    200:
+      $ref: "../../components/responses/category/get-category-by-id.yaml"
+    404:
+      $ref: ../../components/responses/errors/404.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml
+
+# UPDATE CATEGORY BY ID
+patch:
+  description: This api endpoint is used to update category by id
+  summary: update category by id
+  operationId: update-category-by-id
+  tags:
+    - Category
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  requestBody:
+    $ref: ../../components/request-bodies/category/update-category.yaml
+  responses:
+    200:
+      $ref: ../../components/responses/category/get-category-by-id.yaml
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"
+
+# DELETE CATEGORY BY ID
+delete:
+  description: This api endpoint is used to delete category by id
+  summary: delete category by id
+  operationId: delete-category-by-id
+  tags:
+    - Category
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  responses:
+    200:
+      $ref: "../../components/responses/category/delete-category-by-id.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"

@@ -1,0 +1,21 @@
+description: Success response for updating user's profile information
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 200
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: Profile updated successfully
+        data:
+          type: object
+          properties:
+            user:
+              $ref: ../../schemas/user/user.yaml

@@ -1,0 +1,16 @@
+description: Success response for valid token after verify the token
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 200
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: token is valid

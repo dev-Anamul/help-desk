@@ -1,0 +1,16 @@
+description: Success response if logged in user's account is deleted
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 200
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: account deleted successfully

@@ -1,0 +1,21 @@
+description: Response body for getting a category by id
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 200
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: category fetched successfully
+        data:
+          type: object
+          properties:
+            category:
+              $ref: ../../schemas/category/category.yaml

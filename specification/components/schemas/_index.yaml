@@ -2,3 +2,13 @@ login:
   $ref: "./auth/login.yaml"
 signup:
   $ref: "./auth/signup.yaml"
+forgot-password:
+  $ref: auth/forgot-password.yaml
+reset-password:
+  $ref: auth/reset-password.yaml
+verify-token:
+  $ref: auth/verify-token.yaml
+category:
+  $ref: category/category.yaml
+create-category:
+  $ref: category/create-category.yaml

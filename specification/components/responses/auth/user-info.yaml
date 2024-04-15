@@ -1,0 +1,5 @@
+description: logged in user's information
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/user/user.yaml

@@ -37,6 +37,28 @@ paths:
     $ref: "./paths/auth/signup.yaml"
   /api/v1/auth/login:
     $ref: "./paths/auth/login.yaml"
+  /api/v1/auth/forgot-password:
+    $ref: "./paths/auth/forgot-password.yaml"
+  /api/v1/auth/reset-password:
+    $ref: "./paths/auth/reset-password.yaml"
+  /api/v1/auth/verify-token:
+    $ref: paths/auth/verify-token.yaml
+  /api/v1/auth/change-password:
+    $ref: paths/auth/change-password.yaml
+  /api/v1/auth/update-profile:
+    $ref: paths/auth/update-profile.yaml
+  /api/v1/auth/me:
+    $ref: paths/auth/user-info.yaml
+  /api/v1/auth/delete-account:
+    $ref: paths/auth/delete-profile.yaml
+
+  # category
+  /api/v1/categories:
+    $ref: paths/category/categories.yaml
+  /api/v1/categories/{id}:
+    $ref: paths/category/category.yaml
+  /api/v1/categories/{id}/tickets:
+    $ref: paths/category/tickets-by-category.yaml
 
 components:
   parameters:
@@ -50,7 +72,7 @@ components:
 
     # Security Definitions
   securitySchemes:
-    bearerAuth:
+    JWT:
       type: http
       scheme: bearer
       bearerFormat: JWT

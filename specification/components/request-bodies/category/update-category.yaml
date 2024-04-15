@@ -1,0 +1,5 @@
+description: Request body for updating a category
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/category/update-category.yaml

@@ -1,0 +1,8 @@
+type: object
+properties:
+  name:
+    type: string
+    example: "Category 1"
+  description:
+    type: string
+    example: "Category 1 description"

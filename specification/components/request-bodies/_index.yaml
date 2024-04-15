@@ -1,2 +1,6 @@
 signup:
   $ref: auth/signup.yaml
+forgot-password:
+  $ref: auth/forgot-password.yaml
+reset-password:
+  $ref: auth/reset-password.yaml

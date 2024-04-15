@@ -1,0 +1,23 @@
+description: Response body for getting all categories
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 200
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: categories fetched successfully
+        data:
+          type: object
+          properties:
+            categories:
+              type: array
+              items:
+                $ref: ../../schemas/category/category.yaml

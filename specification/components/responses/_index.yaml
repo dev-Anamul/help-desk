@@ -13,3 +13,7 @@
 # auth responses
 signup:
   $ref: auth/signup-success.yaml
+forgot-password:
+  $ref: auth/forgot-password.yaml
+reset-password:
+  $ref: auth/reset-password.yaml

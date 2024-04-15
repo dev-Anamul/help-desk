@@ -1,0 +1,16 @@
+type: object
+properties:
+  name:
+    type: string
+    example: "Category name"
+  description:
+    type: string
+    example: "Category description"
+  created_at:
+    type: string
+    format: date-time
+    example: "2021-01-01T00:00:00Z"
+  updated_at:
+    type: string
+    format: date-time
+    example: "2021-01-01T00:00:00Z"

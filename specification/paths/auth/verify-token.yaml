@@ -1,0 +1,19 @@
+post:
+  description: This api endpoints used to verify the jwt token if it is valid or not
+  summary: Verify JWT token
+  operationId: verify-jwt-token
+  tags:
+    - Auth
+  security:
+    - JWT: []
+  requestBody:
+    $ref: ../../components/request-bodies/auth/verify-token.yaml
+  responses:
+    200:
+      $ref: ../../components/responses/auth/verify-token.yaml
+    400:
+      $ref: ../../components/responses/errors/400.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml

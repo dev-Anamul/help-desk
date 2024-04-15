@@ -1,0 +1,21 @@
+delete:
+  description: This api endpoints used to delete logged in user's account
+  summary: Delete user account
+  operationId: delete-account
+  tags:
+    - Auth
+  security:
+    - JWT: []
+  responses:
+    200:
+      $ref: ../../components/responses/auth/delete-profile.yaml
+    400:
+      $ref: ../../components/responses/errors/400.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    404:
+      $ref: ../../components/responses/errors/404.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml

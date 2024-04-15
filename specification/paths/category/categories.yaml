@@ -1,0 +1,39 @@
+post:
+  description: This api endpoint is used to create a new category
+  summary: create a new category
+  operationId: create-category
+  tags:
+    - Category
+  security:
+    - JWT: []
+  requestBody:
+    $ref: ../../components/request-bodies/category/create-category.yaml
+  responses:
+    201:
+      $ref: ../../components/responses/category/create-category.yaml
+    400:
+      $ref: ../../components/responses/errors/400.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml
+
+get:
+  description: This api endpoint is used to get all categories
+  summary: get all categories
+  operationId: get-all-categories
+  tags:
+    - Category
+  security:
+    - JWT: []
+  responses:
+    200:
+      $ref: ../../components/responses/category/get-all-categories.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml

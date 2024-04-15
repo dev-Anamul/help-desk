@@ -1,0 +1,21 @@
+description: Response body for successfully creating a new category
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 201
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: category created successfully
+        data:
+          type: object
+          properties:
+            category:
+              $ref: ../../schemas/category/category.yaml

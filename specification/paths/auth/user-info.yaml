@@ -1,0 +1,19 @@
+get:
+  description: This endpoints is used to get the logged in users information
+  summary: Get Logged in user's information
+  operationId: user-info
+  tags:
+    - Auth
+  security:
+    - JWT: []
+  responses:
+    200:
+      $ref: ../../components/responses/auth/user-info.yaml
+    400:
+      $ref: ../../components/responses/errors/400.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    404:
+      $ref: ../../components/responses/errors/404.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml

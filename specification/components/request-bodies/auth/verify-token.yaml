@@ -1,0 +1,5 @@
+description: request body for verify jwt token
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/auth/verify-token.yaml
