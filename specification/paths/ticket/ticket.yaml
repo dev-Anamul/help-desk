@@ -1,0 +1,72 @@
+# GET A TICKET BY ID
+get:
+  description: This api endpoint returns a ticket by id
+  summary: Get a ticket by id
+  operationId: get-ticket
+  tags:
+    - Ticket
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  responses:
+    200:
+      $ref: "../../components/responses/ticket/ticket-by-id.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"
+
+# UPDATE A TICKET BY ID
+patch:
+  description: This api endpoint updates a ticket by id
+  summary: Update a ticket by id
+  operationId: update-ticket
+  tags:
+    - Ticket
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  requestBody:
+    $ref: "../../components/request-bodies/ticket/update-ticket.yaml"
+  responses:
+    200:
+      $ref: "../../components/responses/ticket/update-ticket.yaml"
+    400:
+      $ref: "../../components/responses/errors/400.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"
+
+# DELETE A TICKET BY ID
+delete:
+  description: This api endpoint deletes a ticket by id
+  summary: Delete a ticket by id
+  operationId: delete-ticket
+  tags:
+    - Ticket
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  responses:
+    200:
+      $ref: "../../components/responses/ticket/delete-ticket.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"

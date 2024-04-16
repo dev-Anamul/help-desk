@@ -1,0 +1,23 @@
+description: Response body for getting members by team
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 200
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: members fetched successfully
+        data:
+          type: object
+          properties:
+            members:
+              type: array
+              items:
+                $ref: ../../schemas/team/member.yaml

@@ -1,0 +1,21 @@
+description: Response body for updating a ticket
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 200
+        status:
+          type: string
+          example: "success"
+        message:
+          type: string
+          example: "Ticket updated successfully"
+        data:
+          type: object
+          properties:
+            ticket:
+              $ref: ../../schemas/ticket/ticket.yaml

@@ -1,0 +1,22 @@
+description: Response body for getting all teams
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        status:
+          type: string
+          example: "success"
+        message:
+          type: string
+          example: "Teams retrieved successfully"
+        data:
+          type: object
+          properties:
+            teams:
+              type: array
+              items:
+                $ref: ../../schemas/team/team.yaml

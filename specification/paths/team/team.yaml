@@ -1,0 +1,70 @@
+# GET A TEAM BY ID
+get:
+  description: This api endpoint return a team by id
+  summary: Get a team by id
+  operationId: get-team
+  tags:
+    - Team
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  responses:
+    200:
+      $ref: "../../components/responses/team/team-by-id.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"
+
+# UPDATE A TEAM BY ID
+patch:
+  description: This api endpoint is used to update a team by id
+  summary: Update a team by id
+  operationId: update-team
+  tags:
+    - Team
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  requestBody:
+    $ref: "../../components/request-bodies/team/update-team.yaml"
+  responses:
+    200:
+      $ref: "../../components/responses/team/update-team.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"
+
+# DELETE A TEAM BY ID
+delete:
+  description: This api endpoint is used to delete a team by id
+  summary: Delete a team by id
+  operationId: delete-team
+  tags:
+    - Team
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  responses:
+    200:
+      $ref: "../../components/responses/team/delete-team.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"

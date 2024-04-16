@@ -66,6 +66,22 @@ paths:
   /api/v1/systems/{id}:
     $ref: paths/system/system.yaml
 
+  # team
+  /api/v1/teams:
+    $ref: paths/team/teams.yaml
+  /api/v1/teams/{id}:
+    $ref: paths/team/team.yaml
+  /api/v1/teams/{id}/tickets:
+    $ref: paths/team/tickets-by-team.yaml
+  /api/v1/teams/{id}/members:
+    $ref: paths/team/members-by-team.yaml
+
+  # ticket
+  /api/v1/tickets:
+    $ref: paths/ticket/tickets.yaml
+  /api/v1/tickets/{id}:
+    $ref: paths/ticket/ticket.yaml
+
 components:
   parameters:
     $ref: "./components/parameters/_index.yaml"

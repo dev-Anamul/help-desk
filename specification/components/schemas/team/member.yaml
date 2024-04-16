@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: integer
+    example: 1
+  name:
+    type: string
+    example: "team 1"
+  teamId:
+    type: string
+    example: "team-1"
+  userId:
+    type: integer
+    example: 1

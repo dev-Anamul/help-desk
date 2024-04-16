@@ -1,0 +1,20 @@
+description: Response body for creating a team
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 201
+        status:
+          type: string
+          example: "success"
+        message:
+          type: string
+          example: "Team created successfully"
+        data:
+          type: object
+          properties:
+            team:
+              $ref: ../../schemas/team/team.yaml

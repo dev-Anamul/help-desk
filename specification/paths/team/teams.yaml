@@ -1,0 +1,41 @@
+# CREATE TEAM
+post:
+  description: This api endpoint is used to create a new team
+  summary: Create a new team
+  operationId: create-team
+  tags:
+    - Team
+  security:
+    - JWT: []
+  requestBody:
+    $ref: ../../components/request-bodies/team/create-team.yaml
+  responses:
+    201:
+      $ref: ../../components/responses/team/create-team.yaml
+    400:
+      $ref: ../../components/responses/errors/400.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml
+
+# GET ALL TEAMS
+get:
+  description: This api endpoint returns all teams
+  summary: Get all teams
+  operationId: get-teams
+  tags:
+    - Team
+  security:
+    - JWT: []
+  responses:
+    200:
+      $ref: ../../components/responses/team/get-teams.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml

@@ -1,0 +1,21 @@
+get:
+  description: This endpoint returns all tickets by team id
+  summary: Get all tickets by team id
+  operationId: get-tickets-by-team
+  tags:
+    - Team
+  security:
+    - JWT: []
+  parameters:
+    - $ref: "../../components/parameters/path/id.yaml"
+  responses:
+    200:
+      $ref: "../../components/responses/ticket/tickets-by-team.yaml"
+    401:
+      $ref: "../../components/responses/errors/401.yaml"
+    403:
+      $ref: "../../components/responses/errors/403.yaml"
+    404:
+      $ref: "../../components/responses/errors/404.yaml"
+    500:
+      $ref: "../../components/responses/errors/500.yaml"

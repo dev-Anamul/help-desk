@@ -23,3 +23,11 @@ theme:
         - lang: curl
         - lang: Node.js
         - lang: Python
+        - lang: Ruby
+        - lang: Java
+        - lang: C#
+        - lang: Go
+        - lang: PHP
+        - lang: R
+        - lang: JavaScript
+        - lang: Java8+Apache

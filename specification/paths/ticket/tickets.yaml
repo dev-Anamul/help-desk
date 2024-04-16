@@ -1,0 +1,39 @@
+post:
+  description: This endpoint allows you to create a new ticket
+  summary: Create a new ticket
+  operationId: create-ticket
+  tags:
+    - Ticket
+  security:
+    - JWT: []
+  requestBody:
+    $ref: ../../components/request-bodies/ticket/create-ticket.yaml
+  responses:
+    201:
+      $ref: ../../components/responses/ticket/create-ticket.yaml
+    400:
+      $ref: ../../components/responses/errors/400.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml
+
+get:
+  description: This endpoint returns all tickets
+  summary: Get all tickets
+  operationId: get-tickets
+  tags:
+    - Ticket
+  security:
+    - JWT: []
+  responses:
+    200:
+      $ref: ../../components/responses/ticket/get-tickets.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml

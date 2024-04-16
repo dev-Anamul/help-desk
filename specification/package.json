@@ -4,12 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "build:html": "redocly build-docs openapi.yaml --output spec/openapi.html",
+    "build:hbs": "redocly build-docs openapi.yaml --output spec/openapi.hbs",
+    "preview": "redocly preview",
     "bundle": "redocly bundle openapi.yaml --output ../api-gateway/src/spec/openapi.yaml",
     "build:yml": "redocly bundle openapi.yaml --output spec/openapi.yaml",
     "build:json": "redocly bundle openapi.yaml --output spec/openapi.json",
     "serve": "redocly serve spec/openapi.yaml",
     "lint": "redocly lint openapi.yaml",
-    "validate": "redocly validate openapi.yaml"
+    "stats": "redocly stats openapi.yaml --format json"
   },
   "dependencies": {
     "@redocly/cli": "^1.10.6"

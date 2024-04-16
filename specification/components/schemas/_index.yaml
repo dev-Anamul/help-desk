@@ -14,3 +14,5 @@ create-category:
   $ref: category/create-category.yaml
 system:
   $ref: system/system.yaml
+team:
+  $ref: team/team.yaml

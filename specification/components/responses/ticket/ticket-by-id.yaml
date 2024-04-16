@@ -1,0 +1,18 @@
+description: Request body for getting a ticket by ID
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 200
+        status:
+          type: string
+          example: "success"
+        message:
+          type: string
+          example: "Ticket retrieved successfully"
+        data:
+          $ref: ../../schemas/ticket/ticket.yaml

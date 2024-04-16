@@ -1,0 +1,26 @@
+type: object
+properties:
+  title:
+    type: string
+    example: "title"
+  description:
+    type: string
+    example: "description"
+  priority:
+    type: string
+    example: "low"
+  status:
+    type: string
+    example: "open"
+  assignee:
+    type: string
+    example: "assignee"
+  reporter:
+    type: string
+    example: "reporter"
+  dueDate:
+    type: string
+    example: "2021-01-01"
+  systemId:
+    type: string
+    example: "systemId"

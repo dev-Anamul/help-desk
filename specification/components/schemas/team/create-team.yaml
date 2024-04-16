@@ -1,0 +1,11 @@
+type: object
+properties:
+  name:
+    type: string
+    example: "team 1"
+  description:
+    type: string
+    example: "team 1 description"
+required:
+  - name
+  - description
