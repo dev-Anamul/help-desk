@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import routes from "./routes";
 
 // env configuration
 dotenv.config();
@@ -18,6 +19,7 @@ app.get("/health", (_req, res) => {
 });
 
 // Routes
+app.use("/api", routes);
 
 // 404 error handler
 app.use((_req: Request, res: Response) => {

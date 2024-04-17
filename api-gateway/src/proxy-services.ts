@@ -8,7 +8,7 @@ export const useProxyService = (app: Application) => {
     createProxyMiddleware({
       target: "http://user:5001",
       changeOrigin: true,
-      pathRewrite: { "^/api/v1/users": "" },
+      pathRewrite: { "^/api/v1/users": "/api/v1" },
       onProxyReq: (proxyReq, _req) => {
         proxyReq.setHeader("x-user-id", "1234");
       },
@@ -21,7 +21,7 @@ export const useProxyService = (app: Application) => {
     createProxyMiddleware({
       target: "http://auth:5008",
       changeOrigin: true,
-      pathRewrite: { "^/api/v1/auth": "" },
+      pathRewrite: { "^/api/v1/auth": "/api/v1" },
     })
   );
 
@@ -31,7 +31,9 @@ export const useProxyService = (app: Application) => {
     createProxyMiddleware({
       target: "http://ticket:5002",
       changeOrigin: true,
-      pathRewrite: { "^/api/v1/tickets": "" },
+      pathRewrite: {
+        "^/api/v1/tickets": "/api/v1",
+      },
     })
   );
 
@@ -41,7 +43,7 @@ export const useProxyService = (app: Application) => {
     createProxyMiddleware({
       target: "http://team:5003",
       changeOrigin: true,
-      pathRewrite: { "^/api/v1/teams": "" },
+      pathRewrite: { "^/api/v1/teams": "/api/v1" },
     })
   );
 
@@ -51,7 +53,7 @@ export const useProxyService = (app: Application) => {
     createProxyMiddleware({
       target: "http://system:5004",
       changeOrigin: true,
-      pathRewrite: { "^/api/v1/systems": "" },
+      pathRewrite: { "^/api/v1/systems": "/api/v1" },
     })
   );
 
@@ -61,7 +63,7 @@ export const useProxyService = (app: Application) => {
     createProxyMiddleware({
       target: "http://category:5006",
       changeOrigin: true,
-      pathRewrite: { "^/api/v1/categories": "" },
+      pathRewrite: { "^/api/v1/categories": "/api/v1" },
     })
   );
 };

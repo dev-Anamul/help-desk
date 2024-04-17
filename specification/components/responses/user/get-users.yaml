@@ -1,0 +1,22 @@
+description: Request body for getting all users
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        status:
+          type: string
+          example: "success"
+        message:
+          type: string
+          example: "Users retrieved successfully"
+        data:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                $ref: ../../schemas/user/user.yaml

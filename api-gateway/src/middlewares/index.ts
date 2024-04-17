@@ -6,7 +6,7 @@ import { rateLimit } from "express-rate-limit";
 
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000,
-  max: 60,
+  max: 120,
   standardHeaders: "draft-7",
   legacyHeaders: false,
   handler: (_req: Request, res: Response) => {
@@ -18,12 +18,5 @@ const limiter = rateLimit({
 
 export const applyMiddleware = (app: Application) => {
   // Middlewares
-  app.use([
-    express.json(),
-    cors(),
-    morgan("dev"),
-    express.urlencoded({ extended: true }),
-    helmet(),
-    limiter,
-  ]);
+  app.use([cors(), morgan("dev"), helmet(), limiter]);
 };

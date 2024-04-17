@@ -1,20 +1,27 @@
 {
   "name": "specification",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "license": "MIT",
   "scripts": {
     "build:html": "redocly build-docs openapi.yaml --output spec/openapi.html",
     "build:hbs": "redocly build-docs openapi.yaml --output spec/openapi.hbs",
-    "preview": "redocly preview",
+    "start": "nodemon src/index.js",
+    "preview": "redocly preview --port 5055",
+    "start:dev": "concurrently \"yarn start\" \"yarn preview\"",
     "bundle": "redocly bundle openapi.yaml --output ../api-gateway/src/spec/openapi.yaml",
-    "build:yml": "redocly bundle openapi.yaml --output spec/openapi.yaml",
-    "build:json": "redocly bundle openapi.yaml --output spec/openapi.json",
+    "build:yml": "redocly bundle openapi.yaml --output spec/swagger.yaml",
+    "build:json": "redocly bundle openapi.yaml --output spec/swagger.json",
     "serve": "redocly serve spec/openapi.yaml",
     "lint": "redocly lint openapi.yaml",
     "stats": "redocly stats openapi.yaml --format json"
   },
   "dependencies": {
-    "@redocly/cli": "^1.10.6"
+    "@redocly/cli": "^1.10.6",
+    "concurrently": "^8.2.2",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0",
+    "swagger-ui-express": "^5.0.0",
+    "yamljs": "^0.3.0"
   }
 }

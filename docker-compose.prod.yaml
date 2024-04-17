@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  help-desk-api:
+    image: pixfar/help-desk-api:latest
+    container_name: help-desk-api
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - FLASK_APP=app
+      - FLASK_RUN_HOST=

@@ -1,0 +1,17 @@
+description: success responses for user by id request
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        status:
+          type: string
+          example: "success"
+        message:
+          type: string
+          example: "User found"
+        data:
+          $ref: ../../schemas/user/user.yaml

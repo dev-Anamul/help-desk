@@ -1,7 +1,11 @@
-import express, { Request, Response, NextFunction } from "express";
-import cors from "cors";
-import morgan from "morgan";
-import dotenv from "dotenv";
+import express, { Request, Response, NextFunction } from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+import routes from './routes';
+
+// import receivers
+import './receivers';
 
 // env configuration
 dotenv.config();
@@ -10,18 +14,19 @@ dotenv.config();
 const app = express();
 
 // Middlewares
-app.use([express.json(), cors(), morgan("dev")]);
+app.use([express.json(), cors(), morgan('dev')]);
 
 // health check
-app.get("/health", (_req, res) => {
+app.get('/health', (_req, res) => {
   res.status(200).json({ status: `${process.env.SERVICE_NAME} service is up` });
 });
 
 // Routes
+app.use('/api', routes);
 
 // 404 error handler
 app.use((_req: Request, res: Response) => {
-  res.status(404).json({ message: "Resource not found" });
+  res.status(404).json({ message: 'Resource not found' });
 });
 
 // global error handler

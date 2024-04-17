@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   # api-gateway service
@@ -7,7 +7,7 @@ services:
       context: ./api-gateway
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - '5000:5000'
     environment:
       - PORT=5000
       - SERVICE_NAME=gateway-service
@@ -44,6 +44,7 @@ services:
       - SERVICE_NAME=auth-service
       - USER_SERVICE_URL=http://user:5001
       - LOGGER_SERVICE_URL=http://logger:5007
+      - RABBIT_MQ_URL=amqp://rabbitmq
     volumes:
       - ./services/auth:/app
     networks:
@@ -59,6 +60,7 @@ services:
     environment:
       - PORT=5002
       - SERVICE_NAME=ticket-service
+      - RABBIT_MQ_URL=amqp://rabbitmq
     volumes:
       - ./services/ticket:/app
     networks:
@@ -74,6 +76,7 @@ services:
     environment:
       - PORT=5003
       - SERVICE_NAME=team-service
+      - TICKET_SERVICE_URL=http://ticket:5002
     volumes:
       - ./services/team:/app
     networks:
@@ -99,11 +102,17 @@ services:
     build:
       context: ./services/notification
       dockerfile: Dockerfile
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     # ports:
     #   - "5005:5005"
     environment:
       - PORT=5005
       - SERVICE_NAME=notification-service
+      - RABBIT_MQ_URL=amqp://rabbitmq
+      - EMAIL_HOST=mailhog
+      - EMAIL_PORT=1025
     volumes:
       - ./services/notification:/app
     networks:
@@ -119,6 +128,7 @@ services:
     environment:
       - PORT=5006
       - SERVICE_NAME=category-service
+      - TICKET_SERVICE_URL=http://ticket:5002
     volumes:
       - ./services/category:/app
     networks:
@@ -137,12 +147,30 @@ services:
     networks:
       - app-network
 
+  # openapi specification
+  openapi:
+    build:
+      context: ./specification
+      dockerfile: Dockerfile
+    ports:
+      - '5055:5055'
+      - '5065:5065'
+    volumes:
+      - ./specification:/app
+    networks:
+      - app-network
+
   # rabbitmq service
   rabbitmq:
     image: rabbitmq:3.13-management
     ports:
-      - "15672:15672"
-      - "5672:5672"
+      - '15672:15672'
+      - '5672:5672'
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 30s
+      timeout: 30s
+      retries: 10
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
     networks:
@@ -152,8 +180,8 @@ services:
   redis:
     image: redis/redis-stack:latest
     ports:
-      - "6379:6379"
-      - "8001:8001"
+      - '6379:6379'
+      - '8001:8001'
     volumes:
       - redis-data:/data
     networks:
@@ -169,7 +197,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -185,10 +213,10 @@ services:
       postgres:
         condition: service_healthy
     ports:
-      - "5050:80"
+      - '5050:80'
     environment:
-      PGADMIN_DEFAULT_EMAIL: "example@gmail.com"
-      PGADMIN_DEFAULT_PASSWORD: "example"
+      PGADMIN_DEFAULT_EMAIL: 'example@gmail.com'
+      PGADMIN_DEFAULT_PASSWORD: 'example'
     networks:
       - app-network
 
@@ -215,12 +243,12 @@ services:
       mongo:
         condition: service_healthy
     ports:
-      - "8081:8081"
+      - '8081:8081'
     environment:
-      ME_CONFIG_MONGODB_SERVER: "mongo"
-      ME_CONFIG_MONGODB_PORT: "27017"
-      ME_CONFIG_BASICAUTH_USERNAME: "root"
-      ME_CONFIG_BASICAUTH_PASSWORD: "root"
+      ME_CONFIG_MONGODB_SERVER: 'mongo'
+      ME_CONFIG_MONGODB_PORT: '27017'
+      ME_CONFIG_BASICAUTH_USERNAME: 'root'
+      ME_CONFIG_BASICAUTH_PASSWORD: 'root'
     networks:
       - app-network
 
@@ -228,8 +256,8 @@ services:
   mailhog:
     image: mailhog/mailhog
     ports:
-      - "8025:8025"
-      - "1025:1025"
+      - '8025:8025'
+      - '1025:1025'
     volumes:
       - mailhog-data:/data
     networks:

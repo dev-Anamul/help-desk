@@ -13,9 +13,9 @@ info:
     email: anamul@pixfar.com
 servers:
   - description: Local Development
-    url: http://127.0.0.1:6050
-  - description: Production
-    url: https://api.easy-tax.pixfar.com
+    url: http://127.0.0.1:5000
+  - description: Mock Server
+    url: http://localhost:5055/_mock/openapi
 
 tags:
   - name: Auth
@@ -81,6 +81,12 @@ paths:
     $ref: paths/ticket/tickets.yaml
   /api/v1/tickets/{id}:
     $ref: paths/ticket/ticket.yaml
+
+  # user
+  /api/v1/users:
+    $ref: paths/user/users.yaml
+  /api/v1/users/{id}:
+    $ref: paths/user/user.yaml
 
 components:
   parameters:

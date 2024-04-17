@@ -1,0 +1,21 @@
+description: Success response for user creation
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 201
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: User created successfully
+        data:
+          type: object
+          properties:
+            user:
+              $ref: ../../schemas/user/user.yaml

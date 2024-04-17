@@ -1,0 +1,41 @@
+# CREATE USER
+post:
+  description: This api endpoint is used to create a new user
+  summary: Create a new user
+  operationId: create-user
+  tags:
+    - User
+  security:
+    - JWT: []
+  requestBody:
+    $ref: ../../components/request-bodies/user/create-user.yaml
+  responses:
+    201:
+      $ref: ../../components/responses/user/create-user.yaml
+    400:
+      $ref: ../../components/responses/errors/400.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml
+
+# GET ALL USERS
+get:
+  description: This api endpoint returns all users
+  summary: Get all users
+  operationId: get-users
+  tags:
+    - User
+  security:
+    - JWT: []
+  responses:
+    200:
+      $ref: ../../components/responses/user/get-users.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml
