@@ -17,6 +17,8 @@ export const signupHandler = asyncHandler(
       return;
     }
 
+    console.log('data', data.data);
+
     // create auth user
     const authUser = await createAuthUser(data.data);
 

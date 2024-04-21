@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM --platform=linux/amd64 node:20-alpine
 
 WORKDIR /app
 
@@ -8,7 +8,8 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN yarn generate
+# RUN yarn migrate:dev
+RUN npx prisma generate
 
 EXPOSE 5008
 

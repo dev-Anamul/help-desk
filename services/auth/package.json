@@ -25,6 +25,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.11.30",
+    "@types/pg": "^8.11.5",
     "@types/supertest": "^6.0.2",
     "jest": "^29.7.0",
     "prisma": "^5.12.1",
@@ -37,6 +38,7 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^5.12.1",
     "@prisma/client": "5.12.1",
     "amqplib": "^0.10.4",
     "axios": "^1.6.8",
@@ -47,6 +49,7 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
+    "pg": "^8.11.5",
     "zod": "^3.22.4"
   }
 }

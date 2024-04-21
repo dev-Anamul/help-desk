@@ -23,6 +23,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - '5001:5001'
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
       - PORT=5001
       - SERVICE_NAME=user-service
@@ -42,6 +45,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - '5008:5008'
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
       - PORT=5008
       - SERVICE_NAME=auth-service
@@ -197,7 +203,7 @@ services:
 
   # postgres service
   postgres:
-    image: postgres:latest
+    image: postgres:16
     ports:
       - '5432:5432'
     environment:
