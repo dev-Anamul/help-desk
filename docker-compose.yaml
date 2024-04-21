@@ -21,12 +21,15 @@ services:
     build:
       context: ./services/user
       dockerfile: Dockerfile
-    # ports:
-    #   - "5001:5001"
+    ports:
+      - '5001:5001'
     environment:
       - PORT=5001
       - SERVICE_NAME=user-service
       - LOGGER_SERVICE_URL=http://logger:5007
+      - DB_URL=postgres://postgres:postgres@postgres:5432/user?schema=public
+      - RABBIT_MQ_URL=amqp://rabbitmq
+      - REDIS_URL=redis://redis:6379
     volumes:
       - ./services/user:/app
     networks:
@@ -37,14 +40,17 @@ services:
     build:
       context: ./services/auth
       dockerfile: Dockerfile
-    # ports:
-    #   - "5008:5008"
+    ports:
+      - '5008:5008'
     environment:
       - PORT=5008
       - SERVICE_NAME=auth-service
       - USER_SERVICE_URL=http://user:5001
       - LOGGER_SERVICE_URL=http://logger:5007
+      - DB_URL=postgres://postgres:postgres@postgres:5432/user?schema=public
       - RABBIT_MQ_URL=amqp://rabbitmq
+      - JWT_SECRET=322cf05d853b3fc827b0a43ad98c72d7e1704f71599d87983ce74bf02a26ecfd
+      - JWT_EXPIRES_IN=1d
     volumes:
       - ./services/auth:/app
     networks:
@@ -113,6 +119,8 @@ services:
       - RABBIT_MQ_URL=amqp://rabbitmq
       - EMAIL_HOST=mailhog
       - EMAIL_PORT=1025
+      - EMAIL_USERNAME=anamuljibon.abc.123@gmail.com
+      - EMAIL_PASSWORD=wnrofhjypsjupjuo
     volumes:
       - ./services/notification:/app
     networks:
@@ -190,8 +198,8 @@ services:
   # postgres service
   postgres:
     image: postgres:latest
-    # ports:
-    #   - "5432:5432"
+    ports:
+      - '5432:5432'
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres

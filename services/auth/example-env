@@ -1,0 +1,11 @@
+# PORT=5008
+# SERVICE_NAME=auth-service
+
+# DB_URL="postgresql://anamul:anamul618@localhost:5432/auth?schema=public"
+
+# # JWT Config
+# USER_SERVICE_URL=http://localhost:5001
+# LOGGER_SERVICE_URL=http://localhost:5007
+# RABBIT_MQ_URL=amqp://localhost
+# JWT_SECRET=322cf05d853b3fc827b0a43ad98c72d7e1704f71599d87983ce74bf02a26ecfd
+# JWT_EXPIRES_IN=1d

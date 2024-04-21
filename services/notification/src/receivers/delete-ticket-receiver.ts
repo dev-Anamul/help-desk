@@ -8,6 +8,7 @@ const deleteTicketReceiver = async () => {
   const queue = 'delete-ticket';
 
   await channel.assertQueue(queue, { durable: true });
+  await channel.prefetch(1);
 
   channel.consume(queue, async (message) => {
     if (!message) return;
@@ -16,10 +17,16 @@ const deleteTicketReceiver = async () => {
     console.log('Received message:', input);
 
     // send email
-    await deleteTicketEmailHandler();
-
-    channel.ack(message);
+    deleteTicketEmailHandler()
+      .then(() => {
+        console.log('Email sent successfully');
+        channel.ack(message);
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+      });
   });
 };
 
+deleteTicketReceiver();
 deleteTicketReceiver();

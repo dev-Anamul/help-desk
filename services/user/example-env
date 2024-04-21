@@ -1,0 +1,8 @@
+# PORT=5001
+# SERVICE_NAME=user-service
+
+# # DB Config
+# # DB_URL="postgresql://postgres:postgres@localhost:5432/user?schema=public"
+# DB_URL="postgresql://anamul:anamul618@localhost:5432/user?schema=public"
+
+

@@ -8,6 +8,7 @@ export const createTicketReceiver = async () => {
   const queue = 'create-ticket';
 
   await channel.assertQueue(queue, { durable: true });
+  await channel.prefetch(1);
 
   channel.consume(queue, async (message) => {
     if (!message) return;
@@ -16,10 +17,16 @@ export const createTicketReceiver = async () => {
     console.log('Received message:', input);
 
     // send email
-    await createTicketEmailHandler();
-
-    channel.ack(message);
+    createTicketEmailHandler()
+      .then(() => {
+        console.log('Email sent successfully');
+        channel.ack(message);
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+      });
   });
 };
 
+createTicketReceiver();
 createTicketReceiver();

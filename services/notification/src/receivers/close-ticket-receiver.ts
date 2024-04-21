@@ -8,6 +8,7 @@ const closeTicketReceiver = async () => {
   const queue = 'close-ticket';
 
   await channel.assertQueue(queue, { durable: true });
+  await channel.prefetch(1);
 
   channel.consume(queue, async (message) => {
     if (!message) return;
@@ -16,11 +17,18 @@ const closeTicketReceiver = async () => {
     console.log('Received message:', input);
 
     // send email
-    await closeTicketEmailHandler();
+    closeTicketEmailHandler()
+      .then(() => {
+        console.log('Email sent successfully');
 
-    // acknowledge the message
-    channel.ack(message);
+        // acknowledge the message
+        channel.ack(message);
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+      });
   });
 };
 
+closeTicketReceiver();
 closeTicketReceiver();

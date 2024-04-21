@@ -7,7 +7,11 @@ const assignTicketReceiver = async () => {
 
   const queue = 'assign-ticket';
 
-  await channel.assertQueue(queue, { durable: true });
+  await channel.assertQueue(queue, {
+    durable: true,
+  });
+
+  await channel.prefetch(1);
 
   channel.consume(queue, async (message) => {
     if (!message) return;
@@ -16,10 +20,16 @@ const assignTicketReceiver = async () => {
     console.log('Received message:', input);
 
     // send email
-    await assignTicketEmailHandler();
-
-    channel.ack(message);
+    assignTicketEmailHandler()
+      .then(() => {
+        console.log('Email sent successfully');
+        channel.ack(message);
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+      });
   });
 };
 
+assignTicketReceiver();
 assignTicketReceiver();

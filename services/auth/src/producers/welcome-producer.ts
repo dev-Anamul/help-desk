@@ -6,7 +6,9 @@ export const welcomeProducer = async (input: any) => {
 
   const queue = 'welcome';
 
-  await channel.assertQueue(queue, { durable: true });
+  await channel.assertQueue(queue, {
+    durable: true,
+  });
 
   channel.sendToQueue(queue, Buffer.from(JSON.stringify(input)), {
     persistent: true,

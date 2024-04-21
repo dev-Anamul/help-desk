@@ -1,12 +1,31 @@
 type: object
 properties:
-  email:
+  firstName:
     type: string
-    format: email
+    example: John
+  lastName:
+    type: string
+    example: Doe
+  phone:
+    type: string
+    example: '1234567890'
+  address:
+    type: string
+    example: 1234 Main St
+  usernameOrEmail:
+    type: string
     example: example@gmail.com
   password:
+    type: string
+    example: password
+  confirmPassword:
     type: string
     example: password
 required:
   - email
   - password
+  - confirmPassword
+  - firstName
+  - lastName
+  - phone
+  - address

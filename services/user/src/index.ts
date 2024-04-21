@@ -1,8 +1,8 @@
-import express, { Request, Response, NextFunction } from "express";
-import cors from "cors";
-import morgan from "morgan";
-import dotenv from "dotenv";
-import routes from "./routes";
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express, { NextFunction, Request, Response } from 'express';
+import morgan from 'morgan';
+import routes from './routes';
 
 // env configuration
 dotenv.config();
@@ -11,11 +11,11 @@ dotenv.config();
 const app = express();
 
 // Middlewares
-app.use([express.json(), cors(), morgan("dev")]);
+app.use([express.json(), cors(), morgan('dev')]);
 
 // health check
-app.get("/health", (_req, res) => {
-  console.log("user Id", _req.headers["x-user-id"]);
+app.get('/health', (_req, res) => {
+  console.log('user Id', _req.headers['x-user-id']);
 
   res
     .status(200)
@@ -23,11 +23,11 @@ app.get("/health", (_req, res) => {
 });
 
 // Routes
-app.use("/api", routes);
+app.use('/api', routes);
 
 // 404 error handler
 app.use((_req: Request, res: Response) => {
-  res.status(404).json({ message: "Resource not found" });
+  res.status(404).json({ message: 'Resource not found' });
 });
 
 // global error handler

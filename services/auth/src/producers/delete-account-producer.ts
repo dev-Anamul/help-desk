@@ -6,7 +6,9 @@ export const deleteAccountProducer = async (input: any) => {
 
   const queue = 'delete-account';
 
-  await channel.assertQueue(queue, { durable: true });
+  await channel.assertQueue(queue, {
+    durable: true,
+  });
 
   channel.sendToQueue(queue, Buffer.from(JSON.stringify(input)), {
     persistent: true,
