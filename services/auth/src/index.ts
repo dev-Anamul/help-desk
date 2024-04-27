@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import routes from 'routes';
+import { AppError } from './utils/appError';
 
 // env configuration
 dotenv.config();
@@ -32,11 +33,23 @@ app.use((_req: Request, res: Response) => {
 });
 
 // global error handler
-app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
-  console.log('Error occurred', error);
+app.use(
+  (error: AppError, _req: Request, res: Response, _next: NextFunction) => {
+    if (error?.isOperational) {
+      return res.status(error.statusCode).json({
+        code: error.statusCode,
+        status: error.status,
+        message: error.message,
+      });
+    }
 
-  res.status(500).json({ message: error.message });
-});
+    console.log(error);
+
+    return res
+      .status(500)
+      .json({ message: 'Something went wrong. Please try again' });
+  }
+);
 
 // define port
 const PORT = process.env.PORT || 5008;

@@ -1,16 +1,19 @@
 type: object
 properties:
+  id:
+    type: string
+    format: cuid
   name:
     type: string
-    example: "Category name"
+    example: 'Category name'
   description:
     type: string
-    example: "Category description"
-  created_at:
+    example: 'Category description'
+  createdAt:
     type: string
     format: date-time
-    example: "2021-01-01T00:00:00Z"
-  updated_at:
+    example: '2021-01-01T00:00:00Z'
+  updatedAt:
     type: string
     format: date-time
-    example: "2021-01-01T00:00:00Z"
+    example: '2021-01-01T00:00:00Z'

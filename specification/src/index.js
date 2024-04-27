@@ -1,16 +1,16 @@
-const yaml = require("yamljs");
-const swaggerUi = require("swagger-ui-express");
-const express = require("express");
+const yaml = require('yamljs');
+const swaggerUi = require('swagger-ui-express');
+const express = require('express');
 
 // swagger documentation
-const swaggerDocument = yaml.load("./spec/swagger.yaml");
+const swaggerDocument = yaml.load('./spec/swagger.yaml');
 
 const app = express();
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.get('/', (req, res) => {
+  res.send('Hello World from Express!!! 🚀');
 });
 
 const port = process.env.PORT || 5065;

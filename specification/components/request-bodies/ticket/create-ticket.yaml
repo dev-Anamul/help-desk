@@ -1,4 +1,5 @@
 description: Request body for creating a new ticket
+required: true
 content:
   application/json:
     schema:

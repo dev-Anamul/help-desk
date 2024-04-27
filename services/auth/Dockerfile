@@ -4,11 +4,11 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 COPY . .
 
-# RUN yarn migrate:dev
+# RUN yarn migrate:dev -y
 RUN npx prisma generate
 
 EXPOSE 5008

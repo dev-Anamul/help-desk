@@ -3,4 +3,6 @@ name: id
 required: true
 schema:
   type: string
-  example: "1"
+  format: cuid
+  description: The unique identifier of the member.
+  example: clvfmx5380001ngrve2rsnbv5

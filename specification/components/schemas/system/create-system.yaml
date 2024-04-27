@@ -2,18 +2,24 @@ type: object
 properties:
   name:
     type: string
-    example: "System Name"
+    example: 'System Name'
   description:
     type: string
-    example: "System Description"
+    example: 'System Description'
+  status:
+    type: string
+    enum: [ACTIVE, INACTIVE]
+    description: The status of the system
+    example: ACTIVE
   url:
     type: string
-    example: "https://example.com"
-  logo:
+    example: 'https://example.com'
+  owner:
     type: string
-    example: "https://example.com/logo.png"
+    example: 'John Doe'
 required:
   - name
   - description
   - url
   - logo
+  - owner

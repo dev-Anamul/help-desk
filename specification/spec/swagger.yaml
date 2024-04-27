@@ -14,7 +14,7 @@ servers:
   - description: Local Development
     url: http://127.0.0.1:5000
   - description: Mock Server
-    url: http://localhost:5055/_mock/openapi
+    url: http://127.0.0.1:5055/_mock/openapi
 tags:
   - name: Auth
     description: Authentication endpoints (public)
@@ -40,7 +40,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/signup'
       responses:
-        '201':
+        '200':
           $ref: '#/components/responses/signup-success'
         '400':
           $ref: '#/components/responses/400'
@@ -62,17 +62,11 @@ paths:
               $ref: '#/components/schemas/login'
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwiaWF0IjoxNjI5MjM5MDIyfQ.7
+          $ref: '#/components/responses/login-success'
         '400':
           $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
   /api/v1/auth/forgot-password:
     post:
       description: route for reseting password if any user forgot password to login
@@ -118,8 +112,7 @@ paths:
       operationId: verify-jwt-token
       tags:
         - Auth
-      security:
-        - JWT: []
+      security: []
       requestBody:
         $ref: '#/components/requestBodies/verify-token'
       responses:
@@ -245,6 +238,13 @@ paths:
         - Category
       security:
         - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/order-by'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/search'
       responses:
         '200':
           $ref: '#/components/responses/get-all-categories'
@@ -370,6 +370,13 @@ paths:
         - System
       security:
         - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/order-by'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/search'
       responses:
         '200':
           $ref: '#/components/responses/get-systems'
@@ -447,6 +454,32 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
+  /api/v1/systems/{id}/tickets:
+    get:
+      description: This api endpoint returns all tickets by system
+      summary: Get all tickets by system
+      operationId: get-tickets-by-system
+      tags:
+        - System
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/order-by'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          $ref: '#/components/responses/get-tickets-by-system'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '500':
+          $ref: '#/components/responses/500'
   /api/v1/teams:
     post:
       description: This api endpoint is used to create a new team
@@ -477,6 +510,13 @@ paths:
         - Team
       security:
         - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/order-by'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/search'
       responses:
         '200':
           $ref: '#/components/responses/get-teams'
@@ -575,6 +615,29 @@ paths:
         '500':
           $ref: '#/components/responses/500'
   /api/v1/teams/{id}/members:
+    post:
+      description: This endpoint creates a new team member
+      summary: Create a new team member
+      operationId: create-team-member
+      tags:
+        - Team
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        $ref: '#/components/requestBodies/create-team-member'
+      responses:
+        '200':
+          $ref: '#/components/responses/members-by-team'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
     get:
       description: This endpoint returns all members by team id
       summary: Get all members by team id
@@ -585,9 +648,60 @@ paths:
         - JWT: []
       parameters:
         - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/order-by'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/search'
       responses:
         '200':
           $ref: '#/components/responses/members-by-team'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/teams/{id}/members/{member_id}:
+    get:
+      description: This endpoint returns a team member
+      summary: Get a team member
+      operationId: get-team-member
+      tags:
+        - Team
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/member-id'
+      responses:
+        '200':
+          $ref: '#/components/responses/member-by-team'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      description: This endpoint deletes a team member
+      summary: Delete a team member
+      operationId: delete-team-member
+      tags:
+        - Team
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/member-id'
+      responses:
+        '200':
+          $ref: '#/components/responses/delete-team-member'
         '401':
           $ref: '#/components/responses/401'
         '403':
@@ -626,6 +740,13 @@ paths:
         - Ticket
       security:
         - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/order-by'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/search'
       responses:
         '200':
           $ref: '#/components/responses/get-tickets'
@@ -703,28 +824,55 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  /api/v1/users:
+  /api/v1/tickets/assign-to-team:
     post:
-      description: This api endpoint is used to create a new user
-      summary: Create a new user
-      operationId: create-user
+      description: This endpoint allows you to assign a ticket to a team
+      summary: Assign a ticket to a team
+      operationId: assign-ticket-to-team
       tags:
-        - User
+        - Ticket
       security:
         - JWT: []
       requestBody:
-        $ref: '#/components/requestBodies/create-user'
+        $ref: '#/components/requestBodies/assign-to-team'
       responses:
-        '201':
-          $ref: '#/components/responses/create-user'
+        '200':
+          $ref: '#/components/responses/assign-to-team'
         '400':
           $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '403':
           $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
+  /api/v1/tickets/assign-to-user:
+    post:
+      description: This endpoint allows you to assign a ticket to a user
+      summary: Assign a ticket to a user
+      operationId: assign-ticket-to-user
+      tags:
+        - Ticket
+      security:
+        - JWT: []
+      requestBody:
+        $ref: '#/components/requestBodies/assign-to-user'
+      responses:
+        '200':
+          $ref: '#/components/responses/assign-to-user'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /api/v1/users:
     get:
       description: This api endpoint returns all users
       summary: Get all users
@@ -733,6 +881,13 @@ paths:
         - User
       security:
         - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/order-by'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/search'
       responses:
         '200':
           $ref: '#/components/responses/get-users'
@@ -764,61 +919,8 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-    patch:
-      description: This api endpoint is used to update a user by id
-      summary: Update a user by id
-      operationId: update-user-by-id
-      tags:
-        - User
-      security:
-        - JWT: []
-      parameters:
-        - $ref: '#/components/parameters/id'
-      requestBody:
-        $ref: '#/components/requestBodies/update-user'
-      responses:
-        '200':
-          $ref: '#/components/responses/update-user'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '500':
-          $ref: '#/components/responses/500'
-    delete:
-      description: This api endpoint is used to delete a user by id
-      summary: Delete a user by id
-      operationId: delete-user-by-id
-      tags:
-        - User
-      security:
-        - JWT: []
-      parameters:
-        - $ref: '#/components/parameters/id'
-      responses:
-        '204':
-          $ref: '#/components/responses/delete-user'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '500':
-          $ref: '#/components/responses/500'
 components:
   parameters:
-    id:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: string
-        example: '1'
     page:
       in: query
       name: page
@@ -827,6 +929,68 @@ components:
         type: integer
         example: 1
         default: 1
+    limit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        example: 1
+        default: 1
+    order:
+      in: query
+      name: order
+      required: false
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+        example: asc
+        default: asc
+    order-by:
+      in: query
+      name: orderBy
+      required: false
+      schema:
+        type: string
+        example: createdAt
+        default: createdAt
+    fields:
+      in: query
+      name: fields
+      required: false
+      schema:
+        type: string
+        example: id,name,email
+        default: createdAt,updatedAt
+    search:
+      in: query
+      name: search
+      required: false
+      schema:
+        type: string
+        example: search
+        default: search
+    id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+        format: cuid
+        description: The unique identifier of the member.
+        example: clvfmx5380001ngrve2rsnbv5
+    member-id:
+      in: path
+      name: member_id
+      required: true
+      schema:
+        type: string
+        format: cuid
+        description: The unique identifier of the member.
+    orderBy:
+      $ref: '#/components/parameters/order-by'
   schemas:
     signup:
       type: object
@@ -843,7 +1007,7 @@ components:
         address:
           type: string
           example: 1234 Main St
-        usernameOrEmail:
+        email:
           type: string
           example: example@gmail.com
         password:
@@ -888,8 +1052,21 @@ components:
         token:
           type: string
           example: token
+        email:
+          type: string
+          format: email
+          example: example@gmail.com
+        password:
+          type: string
+          example: password
+        confirmPassword:
+          type: string
+          example: password
       required:
         - token
+        - email
+        - password
+        - confirmPassword
     verify-token:
       type: object
       properties:
@@ -903,17 +1080,35 @@ components:
       properties:
         currentPassword:
           type: string
-          example: 12345678
+          example: '12345678'
         newPassword:
           type: string
-          example: 12345678
+          example: '12345678'
         confirmPassword:
           type: string
-          example: 12345678
+          example: '12345678'
       required:
         - currentPassword
         - newPassword
         - confirmPassword
+    update-user:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Anamul
+        lastName:
+          type: string
+          example: Islam
+        phone:
+          type: string
+          example: '01700000000'
+        address:
+          type: string
+          example: Dhaka, Bangladesh
+        avatar:
+          type: string
+          example: https://example.com/avatar.jpg
     user:
       type: object
       properties:
@@ -930,17 +1125,20 @@ components:
     category:
       type: object
       properties:
+        id:
+          type: string
+          format: cuid
         name:
           type: string
           example: Category name
         description:
           type: string
           example: Category description
-        created_at:
+        createdAt:
           type: string
           format: date-time
           example: '2021-01-01T00:00:00Z'
-        updated_at:
+        updatedAt:
           type: string
           format: date-time
           example: '2021-01-01T00:00:00Z'
@@ -955,7 +1153,6 @@ components:
           example: Category description
       required:
         - name
-        - description
     update-category:
       type: object
       properties:
@@ -973,19 +1170,28 @@ components:
           example: 1
         title:
           type: string
-          example: Ticket title
-        description:
+          example: title
+        content:
           type: string
-          example: Ticket description
+          example: content
+        system:
+          type: string
+          example: low
+        category:
+          type: string
+          example: assignee
+        submitter:
+          type: string
+          example: systemId
+        assignedTeam:
+          type: string
+          example: reporter
+        assignedUser:
+          type: string
+          example: '2021-01-01'
         status:
           type: string
           example: open
-        priority:
-          type: string
-          example: low
-        categoryId:
-          type: integer
-          example: 1
         created_at:
           type: string
           format: date-time
@@ -994,12 +1200,19 @@ components:
           type: string
           format: date-time
           example: '2021-01-01T00:00:00Z'
+      required:
+        - title
+        - content
+        - system
+        - category
+        - submitter
+        - status
     system:
       type: object
       properties:
         id:
           type: string
-          format: uuid
+          format: cuid
           description: The unique identifier of the system
         name:
           type: string
@@ -1009,6 +1222,9 @@ components:
           description: The description of the system
         status:
           type: string
+          enum:
+            - ACTIVE
+            - INACTIVE
           description: The status of the system
         createdAt:
           type: string
@@ -1018,10 +1234,15 @@ components:
           type: string
           format: date-time
           description: The date and time the system was last updated
-        deletedAt:
+        url:
           type: string
-          format: date-time
-          description: The date and time the system was deleted
+          format: uri
+          description: The URL of the system
+          example: https://example.com
+        owner:
+          type: string
+          description: The owner of the system
+          example: John Doe
     create-system:
       type: object
       properties:
@@ -1031,33 +1252,47 @@ components:
         description:
           type: string
           example: System Description
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - INACTIVE
+          description: The status of the system
+          example: ACTIVE
         url:
           type: string
           example: https://example.com
-        logo:
+        owner:
           type: string
-          example: https://example.com/logo.png
+          example: John Doe
       required:
         - name
         - description
         - url
         - logo
+        - owner
     update-system:
       type: object
       properties:
         name:
           type: string
-          example: system name
+          example: System Name
         description:
           type: string
-          example: system description
+          example: System Description
         status:
           type: string
-          example: active
-      required:
-        - name
-        - description
-        - status
+          enum:
+            - ACTIVE
+            - INACTIVE
+          description: The status of the system
+          example: ACTIVE
+        url:
+          type: string
+          example: https://example.com
+        owner:
+          type: string
+          example: John Doe
     team:
       type: object
       properties:
@@ -1112,102 +1347,112 @@ components:
         userId:
           type: integer
           example: 1
+    create-team-member:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Team Member Name
+        email:
+          type: string
+          format: email
+          example: example@gmail.com
+        userId:
+          type: string
+          example: ckj1vz4vq0000z1l8z7z7z7z7
+          description: The unique identifier of the user
+        isLeader:
+          type: boolean
+          example: false
+          default: false
+      required:
+        - name
+        - email
+        - teamId
+        - userId
     create-ticket:
       type: object
       properties:
         title:
           type: string
           example: title
-        description:
+        content:
           type: string
-          example: description
-        priority:
+          example: content
+        system:
           type: string
           example: low
+        category:
+          type: string
+          example: assignee
+        submitter:
+          type: string
+          example: systemId
+        assignedTeam:
+          type: string
+          example: reporter
+        assignedUser:
+          type: string
+          example: '2021-01-01'
         status:
           type: string
           example: open
-        assignee:
-          type: string
-          example: assignee
-        reporter:
-          type: string
-          example: reporter
-        dueDate:
-          type: string
-          example: '2021-01-01'
-        systemId:
-          type: string
-          example: systemId
       required:
         - title
-        - description
-        - priority
+        - content
+        - system
+        - category
+        - submitter
         - status
-        - assignee
-        - reporter
-        - dueDate
-        - systemId
     update-ticket:
       type: object
       properties:
         title:
           type: string
           example: title
-        description:
+        content:
           type: string
-          example: description
-        priority:
+          example: content
+        system:
           type: string
           example: low
+        category:
+          type: string
+          example: assignee
+        submitter:
+          type: string
+          example: systemId
+        assignedTeam:
+          type: string
+          example: reporter
+        assignedUser:
+          type: string
+          example: '2021-01-01'
         status:
           type: string
           example: open
-        assignee:
-          type: string
-          example: assignee
-        reporter:
-          type: string
-          example: reporter
-        dueDate:
-          type: string
-          example: '2021-01-01'
-        systemId:
-          type: string
-          example: systemId
-    create-user:
+    assign-to-team:
       type: object
       properties:
-        firstName:
+        ticketId:
           type: string
-          example: John
-        lastName:
+          format: cuid,
+          example: ckjv4v7xv0000l1l5z7z7z7z7
+        teamId:
           type: string
-          example: Doe
-        email:
-          type: string
-          example: example@gmail.com
-        password:
-          type: string
-          example: 12345678
-      required:
-        - firstName
-        - lastName
-        - email
-        - password
-    update-user:
+          format: cuid,
+          example: ckjv4v7xv0000l1l5z7z7z7z7
+    assign-to-user:
       type: object
       properties:
-        firstName:
+        ticketId:
           type: string
-          example: Jon
-        lastName:
+          format: cuid,
+          example: ckjv4v7xv0000l1l5z7z7z7z7
+        userId:
           type: string
-          example: Doe
-        email:
-          type: string
-          format: email
-          example: example@gmail.com
+          format: cuid,
+          example: ckjv4v7xv0000l1l5z7z7z7z7
   responses:
     '400':
       description: bad request
@@ -1225,6 +1470,12 @@ components:
               message:
                 type: string
                 example: Bad request
+              errors:
+                type: object
+                properties:
+                  field:
+                    type: string
+                    example: message
     '401':
       description: Unauthorized
       content:
@@ -1298,13 +1549,32 @@ components:
             properties:
               code:
                 type: integer
-                example: 201
+                example: 200
               status:
                 type: string
                 example: success
               message:
                 type: string
                 example: Signup successful
+              token:
+                type: string
+                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE1MTYyMzkwMjJ9
+    login-success:
+      description: login successful
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: login successful
               token:
                 type: string
                 example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE1MTYyMzkwMjJ9
@@ -1617,6 +1887,30 @@ components:
                 properties:
                   system:
                     $ref: '#/components/schemas/system'
+    get-tickets-by-system:
+      description: Response body for getting tickets by system
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: tickets fetched successfully
+              data:
+                type: object
+                properties:
+                  tickets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ticket'
     get-teams:
       description: Response body for getting all teams
       content:
@@ -1762,7 +2056,7 @@ components:
                 example: success
               message:
                 type: string
-                example: members fetched successfully
+                example: Success message
               data:
                 type: object
                 properties:
@@ -1770,6 +2064,45 @@ components:
                     type: array
                     items:
                       $ref: '#/components/schemas/member'
+    member-by-team:
+      description: Response body for getting members by team
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: Success message
+              data:
+                type: object
+                properties:
+                  member:
+                    $ref: '#/components/schemas/member'
+    delete-team-member:
+      description: Response body for deleting a team member
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: Success message
     get-tickets:
       description: Response body for getting all tickets
       content:
@@ -1874,6 +2207,40 @@ components:
                 properties:
                   ticket:
                     $ref: '#/components/schemas/ticket'
+    assign-to-team:
+      description: Response body for assigning a ticket to a team
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: Ticket assigned to team successfully
+    assign-to-user:
+      description: Response body for assigning a ticket to a user
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+                example: 200
+              status:
+                type: string
+                example: success
+              message:
+                type: string
+                example: Ticket assigned to user successfully
     get-users:
       description: Request body for getting all users
       content:
@@ -1897,28 +2264,6 @@ components:
                     type: array
                     items:
                       $ref: '#/components/schemas/user'
-    create-user:
-      description: Success response for user creation
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-                example: 201
-              status:
-                type: string
-                example: success
-              message:
-                type: string
-                example: User created successfully
-              data:
-                type: object
-                properties:
-                  user:
-                    $ref: '#/components/schemas/user'
     user-by-id:
       description: success responses for user by id request
       content:
@@ -1937,138 +2282,128 @@ components:
                 example: User found
               data:
                 $ref: '#/components/schemas/user'
-    delete-user:
-      description: Success response for deleting a user
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                example: 200
-              status:
-                type: string
-                example: success
-              message:
-                type: string
-                example: User deleted successfully
-    update-user:
-      description: Success response for updating user details
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                example: 200
-              status:
-                type: string
-                example: success
-              message:
-                type: string
-                example: User details updated
-              data:
-                $ref: '#/components/schemas/user'
     signup:
       $ref: '#/components/responses/signup-success'
   requestBodies:
     signup:
+      description: request body for sign up
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/signup'
     forgot-password:
       description: forgot password request body
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/forgot-password'
     reset-password:
       description: request body for reset the login credentials
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/reset-password'
     verify-token:
       description: request body for verify jwt token
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/verify-token'
     change-password:
       description: request body for change password
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/change-password'
     update-profile:
       description: Request body for update the logged in user's information
+      required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/user'
+            $ref: '#/components/schemas/update-user'
     create-category:
       description: Request body for creating a new category
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/create-category'
     update-category:
       description: Request body for updating a category
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/update-category'
     create-system:
       description: Request body for creating a system
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/create-system'
     update-system:
       description: Request body for updating a system
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/update-system'
     create-team:
       description: Request body for creating a new team
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/create-team'
     update-team:
       description: Request body for updating a team
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/update-team'
+    create-team-member:
+      description: Request body for creating a new team member
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create-team-member'
     create-ticket:
       description: Request body for creating a new ticket
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/create-ticket'
     update-ticket:
       description: Request body for updating a ticket
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/update-ticket'
-    create-user:
-      description: Request body for creating a new user
+    assign-to-team:
+      description: Request body for assigning a ticket to a team
+      required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/create-user'
-    update-user:
-      description: Request body for updating user details
+            $ref: '#/components/schemas/assign-to-team'
+    assign-to-user:
+      description: Request body for assigning a ticket to a user
+      required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/update-user'
+            $ref: '#/components/schemas/assign-to-user'
   securitySchemes:
     JWT:
       type: http

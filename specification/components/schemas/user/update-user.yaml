@@ -2,11 +2,16 @@ type: object
 properties:
   firstName:
     type: string
-    example: Jon
+    example: 'Anamul'
   lastName:
     type: string
-    example: Doe
-  email:
+    example: 'Islam'
+  phone:
     type: string
-    format: email
-    example: example@gmail.com
+    example: '01700000000'
+  address:
+    type: string
+    example: 'Dhaka, Bangladesh'
+  avatar:
+    type: string
+    example: 'https://example.com/avatar.jpg'

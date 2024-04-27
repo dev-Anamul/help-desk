@@ -23,11 +23,21 @@ enum Role {
 }
 
 model Auth {
-  id              String    @id @default(cuid())
-  usernameOrEmail String?   @unique
-  password        String
-  role            Role      @default(USER)
-  created_at      DateTime  @default(now())
-  updated_at      DateTime  @updatedAt
-  deleted_at      DateTime?
+  id         String    @id @default(cuid())
+  email      String    @unique
+  password   String
+  role       Role      @default(USER)
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+}
+
+model Verification {
+  id         String    @id @default(cuid())
+  code       String
+  email      String
+  expired_at DateTime
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
 }

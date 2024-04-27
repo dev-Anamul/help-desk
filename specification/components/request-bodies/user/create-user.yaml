@@ -1,5 +1,0 @@
-description: Request body for creating a new user
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/user/create-user.yaml

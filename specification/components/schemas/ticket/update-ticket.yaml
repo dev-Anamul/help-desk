@@ -2,25 +2,25 @@ type: object
 properties:
   title:
     type: string
-    example: "title"
-  description:
+    example: 'title'
+  content:
     type: string
-    example: "description"
-  priority:
+    example: 'content'
+  system:
     type: string
-    example: "low"
+    example: 'low'
+  category:
+    type: string
+    example: 'assignee'
+  submitter:
+    type: string
+    example: 'systemId'
+  assignedTeam:
+    type: string
+    example: 'reporter'
+  assignedUser:
+    type: string
+    example: '2021-01-01'
   status:
     type: string
-    example: "open"
-  assignee:
-    type: string
-    example: "assignee"
-  reporter:
-    type: string
-    example: "reporter"
-  dueDate:
-    type: string
-    example: "2021-01-01"
-  systemId:
-    type: string
-    example: "systemId"
+    example: 'open'

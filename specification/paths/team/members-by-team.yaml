@@ -1,3 +1,29 @@
+# Create a new team member
+post:
+  description: This endpoint creates a new team member
+  summary: Create a new team member
+  operationId: create-team-member
+  tags:
+    - Team
+  security:
+    - JWT: []
+  parameters:
+    - $ref: '../../components/parameters/path/id.yaml'
+  requestBody:
+    $ref: ../../components/request-bodies/team/create-team-member.yaml
+  responses:
+    200:
+      $ref: '../../components/responses/team/members-by-team.yaml'
+    401:
+      $ref: '../../components/responses/errors/401.yaml'
+    403:
+      $ref: '../../components/responses/errors/403.yaml'
+    404:
+      $ref: '../../components/responses/errors/404.yaml'
+    500:
+      $ref: '../../components/responses/errors/500.yaml'
+
+# Get all members by team id
 get:
   description: This endpoint returns all members by team id
   summary: Get all members by team id
@@ -7,15 +33,21 @@ get:
   security:
     - JWT: []
   parameters:
-    - $ref: "../../components/parameters/path/id.yaml"
+    - $ref: '../../components/parameters/path/id.yaml'
+    - $ref: ../../components/parameters/query/page.yaml
+    - $ref: ../../components/parameters/query/limit.yaml
+    - $ref: ../../components/parameters/query/order.yaml
+    - $ref: ../../components/parameters/query/order-by.yaml
+    - $ref: ../../components/parameters/query/fields.yaml
+    - $ref: ../../components/parameters/query/search.yaml
   responses:
     200:
-      $ref: "../../components/responses/team/members-by-team.yaml"
+      $ref: '../../components/responses/team/members-by-team.yaml'
     401:
-      $ref: "../../components/responses/errors/401.yaml"
+      $ref: '../../components/responses/errors/401.yaml'
     403:
-      $ref: "../../components/responses/errors/403.yaml"
+      $ref: '../../components/responses/errors/403.yaml'
     404:
-      $ref: "../../components/responses/errors/404.yaml"
+      $ref: '../../components/responses/errors/404.yaml'
     500:
-      $ref: "../../components/responses/errors/500.yaml"
+      $ref: '../../components/responses/errors/500.yaml'

@@ -15,7 +15,7 @@ servers:
   - description: Local Development
     url: http://127.0.0.1:5000
   - description: Mock Server
-    url: http://localhost:5055/_mock/openapi
+    url: http://127.0.0.1:5055/_mock/openapi
 
 tags:
   - name: Auth
@@ -34,13 +34,13 @@ tags:
 paths:
   # authentication
   /api/v1/auth/signup:
-    $ref: "./paths/auth/signup.yaml"
+    $ref: './paths/auth/signup.yaml'
   /api/v1/auth/login:
-    $ref: "./paths/auth/login.yaml"
+    $ref: './paths/auth/login.yaml'
   /api/v1/auth/forgot-password:
-    $ref: "./paths/auth/forgot-password.yaml"
+    $ref: './paths/auth/forgot-password.yaml'
   /api/v1/auth/reset-password:
-    $ref: "./paths/auth/reset-password.yaml"
+    $ref: './paths/auth/reset-password.yaml'
   /api/v1/auth/verify-token:
     $ref: paths/auth/verify-token.yaml
   /api/v1/auth/change-password:
@@ -65,6 +65,8 @@ paths:
     $ref: paths/system/systems.yaml
   /api/v1/systems/{id}:
     $ref: paths/system/system.yaml
+  /api/v1/systems/{id}/tickets:
+    $ref: paths/system/tickets-by-system.yaml
 
   # team
   /api/v1/teams:
@@ -75,12 +77,18 @@ paths:
     $ref: paths/team/tickets-by-team.yaml
   /api/v1/teams/{id}/members:
     $ref: paths/team/members-by-team.yaml
+  /api/v1/teams/{id}/members/{member_id}:
+    $ref: paths/team/member-by-team.yaml
 
   # ticket
   /api/v1/tickets:
     $ref: paths/ticket/tickets.yaml
   /api/v1/tickets/{id}:
     $ref: paths/ticket/ticket.yaml
+  /api/v1/tickets/assign-to-team:
+    $ref: paths/ticket/assign-to-team.yaml
+  /api/v1/tickets/assign-to-user:
+    $ref: paths/ticket/assign-to-user.yaml
 
   # user
   /api/v1/users:
@@ -90,13 +98,13 @@ paths:
 
 components:
   parameters:
-    $ref: "./components/parameters/_index.yaml"
+    $ref: './components/parameters/_index.yaml'
   schemas:
-    $ref: "./components/schemas/_index.yaml"
+    $ref: './components/schemas/_index.yaml'
   responses:
-    $ref: "components/responses/_index.yaml"
+    $ref: 'components/responses/_index.yaml'
   requestBodies:
-    $ref: "./components/request-bodies/_index.yaml"
+    $ref: './components/request-bodies/_index.yaml'
 
     # Security Definitions
   securitySchemes:

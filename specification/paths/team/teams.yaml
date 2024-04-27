@@ -30,6 +30,13 @@ get:
     - Team
   security:
     - JWT: []
+  parameters:
+    - $ref: ../../components/parameters/query/page.yaml
+    - $ref: ../../components/parameters/query/limit.yaml
+    - $ref: ../../components/parameters/query/order.yaml
+    - $ref: ../../components/parameters/query/order-by.yaml
+    - $ref: ../../components/parameters/query/fields.yaml
+    - $ref: ../../components/parameters/query/search.yaml
   responses:
     200:
       $ref: ../../components/responses/team/get-teams.yaml

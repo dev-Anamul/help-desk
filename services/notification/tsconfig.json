@@ -23,6 +23,6 @@
       "@/*": ["*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "views/**/*.hbs"],
   "exclude": ["node_modules"]
 }

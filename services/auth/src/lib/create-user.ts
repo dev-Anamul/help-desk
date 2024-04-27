@@ -3,22 +3,17 @@ import { CreateAuthUser } from '@/schemas/auth-user';
 import bcrypt from 'bcrypt';
 
 export const createAuthUser = async (data: CreateAuthUser) => {
-  try {
-    // hash password
-    const hashedPassword = await bcrypt.hash(data.password, 10);
+  // hash password
+  const hashedPassword = await bcrypt.hash(data.password, 10);
 
-    // create auth user
-    const authUser = await prisma.auth.create({
-      data: {
-        usernameOrEmail: data.usernameOrEmail,
-        password: hashedPassword,
-      },
-    });
+  // create auth user
+  const authUser = await prisma.auth.create({
+    data: {
+      email: data.email,
+      password: hashedPassword,
+    },
+  });
 
-    // return auth user
-    return authUser;
-  } catch (error) {
-    console.log('error', error);
-    throw error;
-  }
+  // return auth user
+  return authUser;
 };

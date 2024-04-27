@@ -1,0 +1,47 @@
+# Get a team member
+get:
+  description: This endpoint returns a team member
+  summary: Get a team member
+  operationId: get-team-member
+  tags:
+    - Team
+  security:
+    - JWT: []
+  parameters:
+    - $ref: '../../components/parameters/path/id.yaml'
+    - $ref: '../../components/parameters/path/member-id.yaml'
+  responses:
+    200:
+      $ref: '../../components/responses/team/member-by-team.yaml'
+    401:
+      $ref: '../../components/responses/errors/401.yaml'
+    403:
+      $ref: '../../components/responses/errors/403.yaml'
+    404:
+      $ref: '../../components/responses/errors/404.yaml'
+    500:
+      $ref: '../../components/responses/errors/500.yaml'
+
+# Delete a team member
+delete:
+  description: This endpoint deletes a team member
+  summary: Delete a team member
+  operationId: delete-team-member
+  tags:
+    - Team
+  security:
+    - JWT: []
+  parameters:
+    - $ref: '../../components/parameters/path/id.yaml'
+    - $ref: '../../components/parameters/path/member-id.yaml'
+  responses:
+    200:
+      $ref: '../../components/responses/team/delete-team-member.yaml'
+    401:
+      $ref: '../../components/responses/errors/401.yaml'
+    403:
+      $ref: '../../components/responses/errors/403.yaml'
+    404:
+      $ref: '../../components/responses/errors/404.yaml'
+    500:
+      $ref: '../../components/responses/errors/500.yaml'

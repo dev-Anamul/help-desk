@@ -1,4 +1,6 @@
+description: request body for sign up
+required: true
 content:
   application/json:
     schema:
-      $ref: "../../schemas/auth/signup.yaml"
+      $ref: '../../schemas/auth/signup.yaml'

@@ -1,0 +1,6 @@
+description: Request body for assigning a ticket to a team
+required: true
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/ticket/assign-to-team.yaml

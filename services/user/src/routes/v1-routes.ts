@@ -1,18 +1,18 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import * as userController from "../api";
+import * as userController from '../api';
 
 const router = Router();
 
 router
-  .route("/")
+  .route('/')
   .get(userController.getAllHandler)
   .post(userController.createHandler);
 
 router
-  .route("/:id")
+  .route('/:id')
   .get(userController.userByIdHandler)
-  .put(userController.updateHandler)
+  .patch(userController.updateHandler)
   .delete(userController.deleteHandler);
 
 export default router;

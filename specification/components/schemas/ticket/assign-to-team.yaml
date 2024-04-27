@@ -1,0 +1,10 @@
+type: object
+properties:
+  ticketId:
+    type: string
+    format: cuid,
+    example: 'ckjv4v7xv0000l1l5z7z7z7z7'
+  teamId:
+    type: string
+    format: cuid,
+    example: 'ckjv4v7xv0000l1l5z7z7z7z7'

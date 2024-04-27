@@ -7,18 +7,18 @@ post:
   security:
     - JWT: []
   requestBody:
-    $ref: "../../components/request-bodies/system/create-system.yaml"
+    $ref: '../../components/request-bodies/system/create-system.yaml'
   responses:
     201:
-      $ref: "../../components/responses/system/create-system.yaml"
+      $ref: '../../components/responses/system/create-system.yaml'
     400:
-      $ref: "../../components/responses/errors/400.yaml"
+      $ref: '../../components/responses/errors/400.yaml'
     401:
-      $ref: "../../components/responses/errors/401.yaml"
+      $ref: '../../components/responses/errors/401.yaml'
     403:
-      $ref: "../../components/responses/errors/403.yaml"
+      $ref: '../../components/responses/errors/403.yaml'
     500:
-      $ref: "../../components/responses/errors/500.yaml"
+      $ref: '../../components/responses/errors/500.yaml'
 
 get:
   description: This endpoint returns all systems
@@ -28,12 +28,19 @@ get:
     - System
   security:
     - JWT: []
+  parameters:
+    - $ref: ../../components/parameters/query/page.yaml
+    - $ref: ../../components/parameters/query/limit.yaml
+    - $ref: ../../components/parameters/query/order.yaml
+    - $ref: ../../components/parameters/query/order-by.yaml
+    - $ref: ../../components/parameters/query/fields.yaml
+    - $ref: ../../components/parameters/query/search.yaml
   responses:
     200:
-      $ref: "../../components/responses/system/get-systems.yaml"
+      $ref: '../../components/responses/system/get-systems.yaml'
     401:
-      $ref: "../../components/responses/errors/401.yaml"
+      $ref: '../../components/responses/errors/401.yaml'
     403:
-      $ref: "../../components/responses/errors/403.yaml"
+      $ref: '../../components/responses/errors/403.yaml'
     500:
-      $ref: "../../components/responses/errors/500.yaml"
+      $ref: '../../components/responses/errors/500.yaml'

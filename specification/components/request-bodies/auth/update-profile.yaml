@@ -1,5 +1,6 @@
-description: Request body for update the logged in user's information 
-content: 
+description: Request body for update the logged in user's information
+required: true
+content:
   application/json:
-    schema: 
-      $ref: ../../schemas/user/user.yaml
+    schema:
+      $ref: ../../schemas/user/update-user.yaml

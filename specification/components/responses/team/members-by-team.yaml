@@ -13,7 +13,7 @@ content:
           example: success
         message:
           type: string
-          example: members fetched successfully
+          example: 'Success message'
         data:
           type: object
           properties:

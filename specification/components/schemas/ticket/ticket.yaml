@@ -5,24 +5,40 @@ properties:
     example: 1
   title:
     type: string
-    example: "Ticket title"
-  description:
+    example: 'title'
+  content:
     type: string
-    example: "Ticket description"
+    example: 'content'
+  system:
+    type: string
+    example: 'low'
+  category:
+    type: string
+    example: 'assignee'
+  submitter:
+    type: string
+    example: 'systemId'
+  assignedTeam:
+    type: string
+    example: 'reporter'
+  assignedUser:
+    type: string
+    example: '2021-01-01'
   status:
     type: string
-    example: "open"
-  priority:
-    type: string
-    example: "low"
-  categoryId:
-    type: integer
-    example: 1
+    example: 'open'
   created_at:
     type: string
     format: date-time
-    example: "2021-01-01T00:00:00Z"
+    example: '2021-01-01T00:00:00Z'
   updated_at:
     type: string
     format: date-time
-    example: "2021-01-01T00:00:00Z"
+    example: '2021-01-01T00:00:00Z'
+required:
+  - title
+  - content
+  - system
+  - category
+  - submitter
+  - status

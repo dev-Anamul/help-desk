@@ -2,7 +2,7 @@ type: object
 properties:
   id:
     type: string
-    format: uuid
+    format: cuid
     description: The unique identifier of the system
   name:
     type: string
@@ -12,6 +12,7 @@ properties:
     description: The description of the system
   status:
     type: string
+    enum: [ACTIVE, INACTIVE]
     description: The status of the system
   createdAt:
     type: string
@@ -21,7 +22,12 @@ properties:
     type: string
     format: date-time
     description: The date and time the system was last updated
-  deletedAt:
+  url:
     type: string
-    format: date-time
-    description: The date and time the system was deleted
+    format: uri
+    description: The URL of the system
+    example: https://example.com
+  owner:
+    type: string
+    description: The owner of the system
+    example: John Doe

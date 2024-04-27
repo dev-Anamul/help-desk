@@ -4,8 +4,7 @@ post:
   operationId: verify-jwt-token
   tags:
     - Auth
-  security:
-    - JWT: []
+  security: []
   requestBody:
     $ref: ../../components/request-bodies/auth/verify-token.yaml
   responses:

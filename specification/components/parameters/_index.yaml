@@ -1,4 +1,12 @@
 id:
-  $ref: "./path/id.yaml"
+  $ref: './path/id.yaml'
 page:
-  $ref: "./query/page.yaml"
+  $ref: './query/page.yaml'
+limit:
+  $ref: './query/limit.yaml'
+order:
+  $ref: './query/order.yaml'
+orderBy:
+  $ref: './query/order-by.yaml'
+fields:
+  $ref: './query/fields.yaml'

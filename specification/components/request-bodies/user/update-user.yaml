@@ -1,5 +1,0 @@
-description: Request body for updating user details
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/user/update-user.yaml

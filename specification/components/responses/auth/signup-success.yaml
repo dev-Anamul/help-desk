@@ -6,13 +6,13 @@ content:
       properties:
         code:
           type: integer
-          example: 201
+          example: 200
         status:
           type: string
-          example: "success"
+          example: 'success'
         message:
           type: string
-          example: "Signup successful"
+          example: 'Signup successful'
         token:
           type: string
-          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE1MTYyMzkwMjJ9"
+          example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE1MTYyMzkwMjJ9'

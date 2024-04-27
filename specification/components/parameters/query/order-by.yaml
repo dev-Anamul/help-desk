@@ -1,0 +1,7 @@
+in: query
+name: orderBy
+required: false
+schema:
+  type: string
+  example: createdAt
+  default: createdAt

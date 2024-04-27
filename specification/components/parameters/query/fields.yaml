@@ -1,0 +1,7 @@
+in: query
+name: fields
+required: false
+schema:
+  type: string
+  example: id,name,email
+  default: createdAt,updatedAt

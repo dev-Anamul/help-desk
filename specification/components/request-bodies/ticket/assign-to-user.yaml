@@ -1,0 +1,6 @@
+description: Request body for assigning a ticket to a user
+required: true
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/ticket/assign-to-user.yaml

@@ -1,0 +1,25 @@
+get:
+  description: This api endpoint returns all tickets by system
+  summary: Get all tickets by system
+  operationId: get-tickets-by-system
+  tags:
+    - System
+  security:
+    - JWT: []
+  parameters:
+    - $ref: '../../components/parameters/path/id.yaml'
+    - $ref: '../../components/parameters/query/page.yaml'
+    - $ref: '../../components/parameters/query/limit.yaml'
+    - $ref: '../../components/parameters/query/order.yaml'
+    - $ref: '../../components/parameters/query/order-by.yaml'
+    - $ref: '../../components/parameters/query/fields.yaml'
+    - $ref: '../../components/parameters/query/search.yaml'
+  responses:
+    200:
+      $ref: '../../components/responses/ticket/get-tickets-by-system.yaml'
+    401:
+      $ref: '../../components/responses/errors/401.yaml'
+    403:
+      $ref: '../../components/responses/errors/403.yaml'
+    500:
+      $ref: '../../components/responses/errors/500.yaml'

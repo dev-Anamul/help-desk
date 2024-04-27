@@ -1,0 +1,7 @@
+in: path
+name: member_id
+required: true
+schema:
+  type: string
+  format: cuid
+  description: The unique identifier of the member.

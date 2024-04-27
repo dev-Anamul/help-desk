@@ -1,0 +1,23 @@
+post:
+  description: This endpoint allows you to assign a ticket to a team
+  summary: Assign a ticket to a team
+  operationId: assign-ticket-to-team
+  tags:
+    - Ticket
+  security:
+    - JWT: []
+  requestBody:
+    $ref: ../../components/request-bodies/ticket/assign-to-team.yaml
+  responses:
+    200:
+      $ref: ../../components/responses/ticket/assign-to-team.yaml
+    400:
+      $ref: ../../components/responses/errors/400.yaml
+    401:
+      $ref: ../../components/responses/errors/401.yaml
+    403:
+      $ref: ../../components/responses/errors/403.yaml
+    404:
+      $ref: ../../components/responses/errors/404.yaml
+    500:
+      $ref: ../../components/responses/errors/500.yaml

@@ -1,4 +1,5 @@
 description: Request body for updating a system
+required: true
 content:
   application/json:
     schema:

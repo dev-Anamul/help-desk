@@ -3,10 +3,10 @@ properties:
   email:
     type: string
     format: email
-    example: "example@gmail.com"
+    example: 'example@gmail.com'
   password:
     type: string
-    example: "password"
+    example: 'password'
 required:
   - email
   - password

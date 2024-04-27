@@ -1,0 +1,17 @@
+type: object
+properties:
+  name:
+    type: string
+    example: 'Team Member Name'
+  email:
+    type: string
+    format: email
+    example: example@gmail.com
+  userId:
+    type: string
+    format: cuid
+    description: The unique identifier of the user
+  isLeader:
+    type: boolean
+    example: false
+    default: false

@@ -9,7 +9,13 @@ content:
           example: 400
         status:
           type: string
-          example: "error"
+          example: 'error'
         message:
           type: string
-          example: "Bad request"
+          example: 'Bad request'
+        errors:
+          type: object
+          properties:
+            field:
+              type: string
+              example: message

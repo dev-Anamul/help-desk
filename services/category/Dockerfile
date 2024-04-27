@@ -1,12 +1,14 @@
-FROM node:20.11.1-alpine3.19 
+FROM --platform=linux/amd64 node:20-alpine
 
 WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 COPY . .
+
+RUN yarn generate
 
 EXPOSE 5006
 

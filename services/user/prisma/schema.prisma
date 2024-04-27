@@ -9,23 +9,13 @@ datasource db {
   url      = env("DB_URL")
 }
 
-enum Role {
-  ADMIN
-  SUPERVISOR
-  EXPERT
-  USER
-}
-
 model User {
-  id              String   @id @default(cuid())
-  authId          String   @unique
-  usernameOrEmail String   @unique
-  firstName       String
-  lastName        String
-  avatar          String?
-  phone           String
-  address         String
-  role            Role     @default(USER)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id        String  @id @default(cuid())
+  authId    String  @unique
+  email     String? @unique
+  firstName String
+  lastName  String
+  avatar    String?
+  phone     String
+  address   String
 }
