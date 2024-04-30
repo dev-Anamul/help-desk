@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import * as authControllers from '../api';
-import { authenticate } from '@/middlewares/authenticate';
 
 const router = Router();
 

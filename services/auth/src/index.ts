@@ -2,7 +2,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
-import routes from 'routes';
+import routes from './routes';
 import { AppError } from './utils/appError';
 
 // env configuration

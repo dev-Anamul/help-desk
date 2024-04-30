@@ -1,7 +1,6 @@
 import { VerifyTokenSchema } from '@/schemas/verify-token';
 import { verifyToken } from '@/utils';
 import { NextFunction, Request, Response } from 'express';
-import { promisify } from 'util';
 import asyncHandler from 'express-async-handler';
 import { AppError } from '@/utils/appError';
 import { userById } from '@/lib/get-single-user';

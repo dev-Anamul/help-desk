@@ -50,9 +50,10 @@ services:
 
   # auth service
   auth:
-    build:
-      context: ./services/auth
-      dockerfile: Dockerfile
+    # build:
+    #   context: ./services/auth
+    #   dockerfile: Dockerfile
+    image: help-auth
     ports:
       - '5008:5008'
     depends_on:

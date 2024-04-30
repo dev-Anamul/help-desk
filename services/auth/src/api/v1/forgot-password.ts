@@ -1,7 +1,6 @@
 import { userByEmail } from '@/lib';
-import { ForgotPasswordSchema } from '@/schemas/forgot-password';
-import { AppError } from '@/utils/appError';
-import { asyncHandler } from '@/utils/asyncHandler';
+import { ForgotPasswordSchema } from '@/schemas';
+import { asyncHandler } from '@/utils';
 import axios from 'axios';
 import { randomBytes } from 'crypto';
 import { NextFunction, Request, Response } from 'express';

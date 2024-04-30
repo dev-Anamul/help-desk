@@ -1,10 +1,9 @@
-import { RefineChangePasswordSchema } from '@/schemas/change-password';
 import { NextFunction, Response, Request } from 'express';
 import bcrypt from 'bcrypt';
-import { AuthenticatedRequest } from '@/middlewares/authenticate';
 import { AppError } from '@/utils/appError';
 import { changePassword, userById } from '@/lib';
-import { asyncHandler } from '@/utils/asyncHandler';
+import { asyncHandler } from '@/utils';
+import { RefineChangePasswordSchema } from '@/schemas';
 
 export const changePasswordHandler = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

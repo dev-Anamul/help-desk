@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import * as producers from '../../producers';
 import { deleteAuthUser } from '@/lib';
-import { asyncHandler } from '@/utils/asyncHandler';
 import axios from 'axios';
+import { asyncHandler } from '@/utils';
 
 export const deleteAccountHandler = asyncHandler(
   async (req: Request, res: Response) => {

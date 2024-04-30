@@ -1,11 +1,11 @@
-import { userByEmail } from '@/lib/get-single-user';
-import { LoginSchema } from '@/schemas/login';
-import { AppError } from '@/utils/appError';
+import { userByEmail } from '@/lib';
+import { LoginSchema } from '@/schemas';
+import { AppError } from '@/utils';
 import { Response, Request, NextFunction } from 'express';
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
 import { generateToken } from '@/utils';
-import { generateValidationResponse } from '@/utils/format-zod-errors';
+import { generateValidationResponse } from '@/utils';
 
 export const loginHandler = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

@@ -1,0 +1,17 @@
+FROM --platform=linux/amd64 node:20-alpine as build
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+COPY . .
+RUN npx prisma generate
+RUN yarn build
+
+FROM node:20-alpine as production
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install  --frozen-lockfile --production
+COPY --from=build /app/dist ./dist
+# COPY --from=build /app/prisma ./prisma/
+# COPY --from=build /app/node_modules/.prisma/client ./node_modules/.prisma/client
+EXPOSE 5008
+CMD ["yarn", "start"]

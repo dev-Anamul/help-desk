@@ -1,12 +1,9 @@
 import { Request, Response } from 'express';
-import { asyncHandler } from '@/utils/asyncHandler';
-import { RefineResetPasswordSchema } from '@/schemas/reset-password';
-import {
-  deleteVerification,
-  findNotExpiredVerification,
-} from '@/lib/verification/find-single';
+import { asyncHandler } from '@/utils';
+import { RefineResetPasswordSchema } from '@/schemas';
+import { deleteVerification, findNotExpiredVerification } from '@/lib';
 import { changePasswordByEmail } from '@/lib';
-import { generateValidationResponse } from '@/utils/format-zod-errors';
+import { generateValidationResponse } from '@/utils';
 
 export const resetPasswordHandler = asyncHandler(
   async (req: Request, res: Response) => {
