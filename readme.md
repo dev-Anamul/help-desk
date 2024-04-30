@@ -1,6 +1,6 @@
 # Help Desk Microservice
 
-[![Build Status](https://img.shields.io/travis/your-username/help-desk-microservice/master.svg?style=flat-square)](https://travis-ci.org/your-username/help-desk-microservice)
+[![Build Status](https://img.shields.io/travis/your-username/help-desk-microservice/master.svg?style=flat-square)](https://github.com/dev-Anamul/help-desk/actions)
 [![License](https://img.shields.io/github/license/your-username/help-desk-microservice.svg?style=flat-square)](https://github.com/your-username/help-desk-microservice/blob/master/LICENSE)
 
 ## Description
@@ -13,24 +13,26 @@ This is a microservice application for managing a help desk system. It provides 
 - Ticket creation and management
 - Ticket assignment and escalation
 - Ticket resolution and closure
-- Reporting and analytics
 
 ## Technologies Used
 
 - Node.js
 - Express.js
+- TypeScript
+- postgreSQL
+- prisma
 - MongoDB
+- Redis
+- RabbitMQ
+- GitHub actions
 - Docker
-- Kubernetes
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (version X.X.X)
-- MongoDB (version X.X.X)
-- Docker (version X.X.X)
-- Kubernetes (version X.X.X)
+- [Node.js](https://nodejs.org/en/download/)
+- [Docker](https://www.docker.com/get-started)
 
 ### Installation
 
@@ -50,20 +52,14 @@ This is a microservice application for managing a help desk system. It provides 
 3. Configure environment variables:
 
    ```bash
-   cp .env.example .env
+   docker-compose up -d
    ```
 
    Update the `.env` file with your configuration.
 
-4. Start the application:
-
-   ```bash
-   npm start
-   ```
-
 ## Usage
 
-- API documentation: [link-to-api-docs](https://your-api-docs-url.com)
+- API documentation: [link-to-api-docs](https://localhost:5065/api-docs)
 - Postman collection: [link-to-postman-collection](https://your-postman-collection-url.com)
 
 ## Contributing
