@@ -1,12 +1,230 @@
-version: "3.8"
+version: '3.8'
+
 services:
-  help-desk-api:
-    image: pixfar/help-desk-api:latest
-    container_name: help-desk-api
-    restart: always
+  # api-gateway service
+  gateway:
+    image: '01791689522/api-gateway:latest'
     ports:
-      - "5000:5000"
+      - '5000:5000'
     environment:
-      - FLASK_ENV=production
-      - FLASK_APP=app
-      - FLASK_RUN_HOST=
+      PORT: 5000
+      SERVICE_NAME: gateway-service
+      AUTH_SERVICE_URL: http://auth:5008
+      MONGO_URL: mongodb://mongo:27017
+    depends_on:
+      - auth
+      - user
+      - ticket
+      - team
+      - system
+      - category
+      - notification
+    networks:
+      - help-desk-network
+
+  # user service
+  user:
+    image: '01791689522/user-service:latest'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PORT: 5001
+      SERVICE_NAME: user-service
+      LOGGER_SERVICE_URL: http://logger:5007
+      DB_URL: postgres://postgres:postgres@postgres:5432/user?schema=public
+      RABBIT_MQ_URL: amqp://rabbitmq
+      REDIS_URL: redis://redis:6379
+    networks:
+      - help-desk-network
+
+  # auth service
+  auth:
+    image: '01791689522/auth-service:latest'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PORT: 5008
+      SERVICE_NAME: auth-service
+      USER_SERVICE_URL: http://user:5001
+      LOGGER_SERVICE_URL: http://logger:5007
+      NOTIFICATION_SERVICE_URL: http://notification:5005
+      DB_URL: postgres://postgres:postgres@postgres:5432/auth?schema=public
+      RABBIT_MQ_URL: amqp://rabbitmq
+      JWT_SECRET: 322cf05d853b3fc827b0a43ad98c72d7e1704f71599d87983ce74bf02a26ecfd
+      JWT_EXPIRES_IN: 1d
+    networks:
+      - help-desk-network
+
+  # ticket service
+  ticket:
+    image: '01791689522/ticket-service:latest'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PORT: 5002
+      SERVICE_NAME: ticket-service
+      USER_SERVICE_URL: http://user:5001
+      TEAM_SERVICE_URL: http://team:5003
+      RABBIT_MQ_URL: amqp://rabbitmq
+      REDIS_URL: redis://redis:6379
+      DB_URL: postgres://postgres:postgres@postgres:5432/ticket?schema=public
+    networks:
+      - help-desk-network
+
+  # team service
+  team:
+    image: '01791689522/team-service:latest'
+    environment:
+      PORT: 5003
+      SERVICE_NAME: team-service
+      TICKET_SERVICE_URL: http://ticket:5002
+      USER_SERVICE_URL: http://user:5001
+      DB_URL: postgres://postgres:postgres@postgres:5432/team?schema=public
+      RABBIT_MQ_URL: amqp://rabbitmq
+      REDIS_URL: redis://redis:6379
+    networks:
+      - help-desk-network
+
+  # system service
+  system:
+    image: '01791689522/system-service:latest'
+    environment:
+      PORT: 5004
+      SERVICE_NAME: system-service
+      DB_URL: postgres://postgres:postgres@postgres:5432/system?schema=public
+      RABBIT_MQ_URL: amqp://rabbitmq
+      TICKET_SERVICE_URL: http://ticket:5002
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    networks:
+      - help-desk-network
+
+  # notification service
+  notification:
+    image: '01791689522/notification-service:latest'
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      PORT: 5005
+      SERVICE_NAME: notification-service
+      RABBIT_MQ_URL: amqp://rabbitmq
+      EMAIL_HOST: mailhog
+      EMAIL_PORT: 1025
+      EMAIL_USERNAME: anamuljibon.abc.123@gmail.com
+      EMAIL_PASSWORD: wnrofhjypsjupjuo
+    networks:
+      - help-desk-network
+
+  # category service
+  category:
+    image: '01791689522/category-service:latest'
+    depends_on:
+      - postgres
+      - rabbitmq
+      - redis
+    environment:
+      PORT: 5006
+      SERVICE_NAME: category-service
+      TICKET_SERVICE_URL: http://ticket:5002
+      DB_URL: postgres://postgres:postgres@postgres:5432/category?schema=public
+      RABBIT_MQ_URL: amqp://rabbitmq
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    networks:
+      - help-desk-network
+
+  # openapi specification
+  specification:
+    image: '01791689522/specification-service:latest'
+    ports:
+      - '5065:5065'
+    networks:
+      - help-desk-network
+
+  # rabbitmq service
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 30s
+      timeout: 30s
+      retries: 10
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    networks:
+      - help-desk-network
+
+  # mongo service
+  redis:
+    image: redis/redis-stack:latest
+    ports:
+      - '6379:6379'
+      - '8001:8001'
+    volumes:
+      - redis:/data
+    networks:
+      - help-desk-network
+
+  # postgres service
+  postgres:
+    image: postgres:16
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - help-desk-network
+
+  # mongo service
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27020:27017'
+    volumes:
+      - mongo:/data/db
+    networks:
+      - help-desk-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh mongo:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  # mailhog service
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+    volumes:
+      - mailhog:/data
+    networks:
+      - help-desk-network
+
+networks:
+  help-desk-network:
+    driver: bridge
+
+volumes:
+  rabbitmq:
+  redis:
+  mailhog:
+  mongo:
+  postgres:
