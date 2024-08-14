@@ -5,7 +5,6 @@
     "lib": ["ES6"],
     "allowJs": true,
     "module": "CommonJS",
-    "rootDir": ".",
     "outDir": "./dist",
     "esModuleInterop": true,
     "strict": true,
